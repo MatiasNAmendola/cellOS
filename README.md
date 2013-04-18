@@ -1,4 +1,4 @@
 cellOS
 ======
 
-Sistema operativo para celular en Python.
+El mejor Sistema operativo para celular en Python.
