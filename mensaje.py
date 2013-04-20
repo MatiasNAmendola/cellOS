@@ -1,3 +1,5 @@
+from proceso import Proceso
+
 class Mensaje(Proceso):
 
     def __init__(self,nombre,tiempo,numero,texto):

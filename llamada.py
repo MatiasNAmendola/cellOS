@@ -1,3 +1,5 @@
+from proceso import Proceso
+
 class Llamada(Proceso):
 
     def __init__(self,nombre,tiempo,numero,duracion):
