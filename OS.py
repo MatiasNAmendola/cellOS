@@ -22,36 +22,39 @@ class OS:
 
 	def run(self):
 
-		runningProcess = self.runningProcess
-		scheduler = self.scheduler
-		dispatcher = self.dispatcher
 		# Revisamos si hay proceso running
-		if runningProcess != None:
+		if self.runningProcess != None:
 			
 			# Revisar si termino
-			if runningProcess.elapsedTime == runningProcess.totalTime:
-				runningProcess = None
+			print "elapsed:",self.runningProcess.elapsedTime,"total:",self.runningProcess.totalTime
+			print self.runningProcess.elapsedTime >= self.runningProcess.totalTime
+			if int(self.runningProcess.elapsedTime) >= int(self.runningProcess.totalTime):
+
+				print "entra if"
+
+				self.runningProcess = None
 				#Revisar si hay algun proceso en la cola ready
-				if( ~scheduler.isEmpty() ):
-					runningProcess = scheduler.dequeReady()
+				if( ~self.scheduler.isEmpty() ):
+					self.runningProcess = self.scheduler.dequeReady()
 				else:
 					return
 
-			if ~self.scheduler.isEmpty():
+			if self.scheduler.isEmpty()==False:
 				# Revisar si existe algun proceso con mayor prioridad
-				if runningProcess.getPriority() > scheduler.nextReady().getPriority():
-					dispatcher.save(runningProcess)
-					scheduler.schedule(runningProcess)
-					runningProcess = scheduler.dequeReady()
-					dispatcher.load(runningProcess)
+				if self.runningProcess.getPriority() > self.scheduler.nextReady().getPriority():
+					self.dispatcher.save(self.runningProcess)
+					self.scheduler.schedule(self.runningProcess)
+					self.runningProcess = self.scheduler.dequeReady()
+					self.dispatcher.load(self.runningProcess)
 
-			runningProcess.elapsedTime+=1
+			if self.runningProcess != None:
+				self.runningProcess.elapsedTime+=1
 
 		else:
 			if  self.scheduler.isEmpty() == False:
-				runningProcess = scheduler.dequeReady()
-				dispatcher.load(runningProcess)
-				runningProcess.elapsedTime+=1
+				self.runningProcess = self.scheduler.dequeReady()
+				self.dispatcher.load(self.runningProcess)
+				self.runningProcess.elapsedTime+=1
 
 
 	def getReadyList(self):

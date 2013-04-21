@@ -5,7 +5,7 @@ class Process:
 		self.name = attributes[0]
 		self.date = int(attributes[1])
 		self.type= int(attributes[2])
-		self.priority = attributes[3]
+		self.priority = int(attributes[3])
 		if self.type == 7:
 			self.totalTime = 2
 		else:

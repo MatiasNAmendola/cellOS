@@ -40,7 +40,7 @@ def cycle(counter, os, launcher):
 		os.run()
 		#many things
 		print "I'm counting ", counter
-		time.sleep(1)
+		time.sleep(.5)
 		top(os.getReadyList())
 		
 		counter+=1
