@@ -1,6 +1,6 @@
 from proceso import Proceso
 
-class Llamada(Proceso):
+class Call(Proceso):
 
     def __init__(self,nombre,tiempo,numero,duracion):
         self.id = id
