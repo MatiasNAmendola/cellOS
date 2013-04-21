@@ -10,16 +10,15 @@
 
 class Process:
 
-	def __init__(self, id, attributes):
-		self.id = id
+	def __init__(self, attributes):
+		self.id = 0
 		self.name = attributes[0]
 		self.date = int(attributes[1])
 		self.type= attributes[2]
 		self.priority = attributes[3]
-		del attributes[0:4]
-		self.options = attributes
+		self.totalTime = attributes[4]
 		self.elapsedTime = 0
-		self.totalTime = 0
+		
 
 	def getName(self):
 		return self.name

@@ -27,8 +27,7 @@ class Launcher:
 	def stringToProcess(self, string):
 		string = string[:-2]
 		attributes = string.split(";")
-		nextProcess = Process(self.nextID, attributes)
-		self.nextID += 1
+		nextProcess = Process(attributes)
 		return nextProcess
 
 	def getNextProcesses(self, count):

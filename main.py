@@ -25,7 +25,6 @@ if __name__ == '__main__':
 	root = Tk()
 	app = GUI(root)
 	os = OS()
-	quit = False	
 	cycleThread = threading.Thread(None, target= cycle, args= (counter, os, launcher))
 	cycleThread.setDaemon(True)
 	cycleThread.start()
