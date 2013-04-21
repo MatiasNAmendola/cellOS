@@ -24,10 +24,11 @@ def top(originalList):
 			printProcess(proc, False)
 
 def printProcess(proc, isRunning):
-	status = "Ready"
-	if isRunning:
-		status = "Running"
-	print proc.id, proc.name, status, proc.date, proc.type, proc.priority, proc.elapsedTime, proc.totalTime
+	if proc != None:
+		status = "Ready"
+		if isRunning:
+			status = "Running"
+		print proc.id, proc.name, status, proc.date, proc.type, proc.priority, proc.elapsedTime, proc.totalTime
 		
 #####################################################
 
@@ -36,6 +37,7 @@ def cycle(counter, os, launcher):
 	quit = False
 	while(~quit):
 		os.getProcesses(launcher.getNextProcesses(counter))
+		os.run()
 		#many things
 		print "I'm counting ", counter
 		time.sleep(1)

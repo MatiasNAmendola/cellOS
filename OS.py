@@ -16,12 +16,13 @@ class OS:
 		if nextProcessesList != None:
 			for proc in nextProcessesList:
 				print "OS received process", proc.getName()
-				proc.id= lastID
-				lastID+=1
-				scheduler.schedule(proc)
+				proc.id= self.lastID
+				self.lastID+=1
+				self.scheduler.schedule(proc)
 
 	def run(self):
 
+		runningProcess = self.runningProcess
 		# Revisamos si hay proceso running
 		if runningProcess != None:
 			
@@ -46,8 +47,8 @@ class OS:
 
 	def getReadyList(self):
 		info = []
-		info.append(runningProcess)
-		info.extend(scheduler.readyList)
+		info.append(self.runningProcess)
+		info.extend(self.scheduler.readyList)
 
 		return info
 
