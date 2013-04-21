@@ -3,8 +3,19 @@ from proceso import *
 from launcher import *
 from GUI import *
 import time
-import multiprocessing as mp
+import threading
 from OS import *
+
+
+def cycle(counter, os, launcher):
+	quit = False
+	while(~quit):
+		os.getProcesses(launcher.getNextProcesses(counter))
+		#many things
+		print "I'm counting ", counter
+		time.sleep(1)
+		counter+=1
+
 
 
 if __name__ == '__main__':
@@ -13,13 +24,9 @@ if __name__ == '__main__':
 	counter = 0
 	root = Tk()
 	app = GUI(root)
-	root.mainloop()
 	os = OS()
-	
 	quit = False	
-	while(~quit):
-		os.getProcesses(launcher.getNextProcesses(counter))
-		#many things
-		print "I'm counting ", counter
-		counter += 1
-		time.sleep(.1)
+	cycleThread = threading.Thread(None, target= cycle, args= (counter, os, launcher))
+	cycleThread.setDaemon(True)
+	cycleThread.start()
+	root.mainloop()
