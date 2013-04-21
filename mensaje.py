@@ -1,8 +1,10 @@
 from proceso import Proceso
 
-class Mensaje(Proceso):
+class Message(Proceso):
 
-    def __init__(self,nombre,tiempo,numero,texto):
+    def __init__(self,id, attributes, numero,texto):
+        
+        Process.__init__(self, id, attributes)
         self.id = id
         self.name = nombre
         self.time = tiempo

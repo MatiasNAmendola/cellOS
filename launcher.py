@@ -27,7 +27,30 @@ class Launcher:
 	def stringToProcess(self, string):
 		string = string[:-2]
 		attributes = string.split(";")
-		nextProcess = Process(self.nextID, attributes)
+
+		type_of_process = attributes[0];
+
+		# Distinción de Procesos.
+		if type_of_process == "hacer_llamada":
+			nextProcess = Call(attributes)
+
+		else if type_of_process == "recibir_llamada":
+			nextProcess = Call(attributes) 
+
+		else if type_of_process == "enviar_mensajes":
+			nextProcess = Message(attributes) 
+
+		else if type_of_process == "recibir_mensajes":
+			nextProcess = Message(attributes) 
+
+		else if type_of_process == "nuevo_contacto":
+			nextProcess = NewContact(attributes) 
+
+		else:
+			nextProcess = Process(attributes) 
+
+
+
 		self.nextID += 1
 		return nextProcess
 
