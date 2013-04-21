@@ -11,6 +11,7 @@ class Message(Process):
 		self.text = attributes[5]
 		self.totalTime = getSendingTime(self)
 
+
     def getNumber(self):
         return self.number
 
