@@ -6,7 +6,7 @@ def loadFromFile(filePath):
 	for line in io:
 		lines.append(line)
 	io.close()
-	print lines
+#	print lines
 	return lines
 		
 
@@ -31,12 +31,10 @@ class Launcher:
 		self.nextID += 1
 		return nextProcess
 
-		
-		
-#	def sortProcessListByTime():
-	
-#	def stringToProcess(string):
-	
-	
-	
+	def getNextProcesses(self, count):
+		processesToSend = []
+		while self.processList and self.processList[0].getDate() == count:
+			processesToSend.append(self.processList[0])
+			del self.processList[0]
+		return processesToSend
 		
