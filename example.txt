@@ -1,9 +1,9 @@
 angry_birds;1;9;8;15
-hacer_llamada;41;1;0;2277567;10
-recibir_llamada;5;2;0;2277567;15
+hacer_llamada;5;1;0;2277567;10
+recibir_llamada;7;2;0;2277567;15
 recibir_mensajes;6;4;2;2277567;Hola
 recibir_mensajes;9;4;2;2277567;Alo?
-recibir_llamada;12;2;0;2277567;15
+recibir_llamada;12;2;0;94181333;15
 enviar_mensajes;14;3;2;2277567;Como va?
 recibir_mensajes;15;4;2;2277567;Bien y tu?
 nuevo_contacto;16;5;6;Diego Alvarez;2277567

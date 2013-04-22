@@ -2,6 +2,7 @@ from scheduler import Scheduler
 from dispatcher import Dispatcher
 from proceso import Process
 from display import *
+import time
 
 class OS:
 	
@@ -18,9 +19,17 @@ class OS:
 		if nextProcessesList != None:
 			for proc in nextProcessesList:
 				print "OS received process", proc.getName()
-				proc.id= self.lastID
-				self.lastID+=1
-				self.scheduler.schedule(proc)
+				accepted = True
+				if self.runningProcess != None:
+					if self.runningProcess.type == 1 or self.runningProcess == 2:
+						if proc.type ==2:
+							print "Llamada perdida de ", proc.getNumber()
+							time.sleep(4)
+							accepted = False
+				if (accepted):
+					proc.id= self.lastID
+					self.lastID+=1
+					self.scheduler.schedule(proc)
 
 	def run(self):
 
