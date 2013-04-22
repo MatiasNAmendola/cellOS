@@ -12,6 +12,12 @@ class Call(Process):
 		self.phoneNumber = attributes[4]
 		self.totalTime = attributes[5]
     
+	def __init__(self, number, actualDate):
+		typeOfProcess = 1
+		Process.__init__(self,typeOfProcess,actualDate)
+		self.isIncoming = False
+		self.phoneNumber = cNumber
+
 	def getNumber(self):
 		return self.phoneNumber
 
