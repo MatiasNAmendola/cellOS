@@ -20,7 +20,7 @@ class Message(Process):
 
 
     def getNumber(self):
-        return self.number
+        return self.phoneNumber
 
     def getText(self):
         return self.text

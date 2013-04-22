@@ -11,6 +11,7 @@ def cycle(counter, os, launcher):
 		os.getProcesses(launcher.getNextProcesses(counter))
 		os.run()
 		os.top()
+		os.displayCurrentProcess()
 		#many things
 		print "I'm counting ", counter
 		counter+=1

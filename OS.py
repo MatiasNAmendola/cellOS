@@ -68,4 +68,7 @@ class OS:
 	
 	def top(self):
 		self.display.top(self.getReadyList())
+	
+	def displayCurrentProcess(self):
+		self.display.displayCurrentProcess(self.runningProcess)
 

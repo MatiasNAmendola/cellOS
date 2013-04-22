@@ -1,4 +1,8 @@
 import os as operativeSystem
+from proceso import *
+from mensaje import *
+from llamada import *
+from agenda import *
 
 class Display:
 	
@@ -23,3 +27,26 @@ class Display:
 			for proc in readyList:
 				self.printProcess(proc, False)
 		print "---------------------------"
+
+	def displayCurrentProcess(self, proc):
+		print "Screen:"
+		if proc == None:
+			print "No current process"
+		elif proc.type == 1:
+			print "OUTGOING CALL"
+			print proc.getNumber()
+			print "Duration:", proc.elapsedTime
+		elif proc.type == 2:
+			print "INCOMING CALL"
+			print proc.getNumber()
+			print "Duration:", proc.elapsedTime
+		elif proc.type == 3:
+			print "SENDING A MESSAGE"
+			print proc.getNumber()
+			print proc.getText()
+		elif proc.type == 5:
+			print "CONTACT ADDED"
+			print proc.contactNumber
+			print proc.contactName
+		else:
+			print "OTHER PROCESSES"

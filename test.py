@@ -17,3 +17,4 @@ s.printReadyList()
 despachado=s.dequeReady()
 print "elemento despachado:",despachado.getPriority()
 s.printReadyList()
+
