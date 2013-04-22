@@ -4,7 +4,19 @@ from mensaje import *
 from llamada import *
 from agenda import *
 
+class LostCall:
+	def __init__(self, call):
+		self.call = call
+		self.counter = 2
+
+
+
 class Display:
+	
+
+	
+	def __init__(self):
+		self.lostCalls = [] 
 	
 	def cls(self):
 	    operativeSystem.system(['clear','cls'][operativeSystem.name == 'nt'])
@@ -50,3 +62,21 @@ class Display:
 			print proc.contactName
 		else:
 			print "OTHER PROCESSES"
+		print "-----------------"
+		self.displayLostCalls()
+		
+	def getLostCall(self, call):
+		self.lostCalls.append(LostCall(call))
+		
+	def displayLostCalls(self):
+		for i in range(len(self.lostCalls)):
+			print "***LOST CALL FROM ", self.lostCalls[i].call.getNumber(), "***"
+			if self.lostCalls[i].counter == 0:
+				del self.lostCalls[i]
+			else:
+				self.lostCalls[i].counter -=1
+			
+		
+
+
+		

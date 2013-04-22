@@ -23,8 +23,7 @@ class OS:
 				if self.runningProcess != None:
 					if self.runningProcess.type == 1 or self.runningProcess == 2:
 						if proc.type ==2:
-							print "Llamada perdida de ", proc.getNumber()
-							time.sleep(4)
+							self.display.getLostCall(proc)
 							accepted = False
 				if (accepted):
 					proc.id= self.lastID
