@@ -28,8 +28,6 @@ class OS:
 			# Revisar si termino
 			if int(self.runningProcess.elapsedTime) >= int(self.runningProcess.totalTime):
 
-				print "entra if"
-
 				self.runningProcess = None
 				#Revisar si hay algun proceso en la cola ready
 				if( ~self.scheduler.isEmpty() ):
