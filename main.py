@@ -36,14 +36,14 @@ def printProcess(proc, isRunning):
 def cycle(counter, os, launcher):
 	quit = False
 	while(~quit):
+		
 		os.getProcesses(launcher.getNextProcesses(counter))
+		top(os.getReadyList())
 		os.run()
 		#many things
 		print "I'm counting ", counter
-		time.sleep(1)
-		top(os.getReadyList())
-		
 		counter+=1
+		time.sleep(1)
 
 
 

@@ -1,4 +1,7 @@
 from proceso import Process
+from llamada import *
+from mensaje import *
+from agenda import *
 
 def loadFromFile(filePath):	
 	lines = []
