@@ -26,11 +26,7 @@ class OS:
 		if self.runningProcess != None:
 			
 			# Revisar si termino
-			print "elapsed:",self.runningProcess.elapsedTime,"total:",self.runningProcess.totalTime
-			print self.runningProcess.elapsedTime >= self.runningProcess.totalTime
 			if int(self.runningProcess.elapsedTime) >= int(self.runningProcess.totalTime):
-
-				print "entra if"
 
 				self.runningProcess = None
 				#Revisar si hay algun proceso en la cola ready
