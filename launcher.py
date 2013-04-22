@@ -29,33 +29,22 @@ class Launcher:
 #			print proc.getName(), " ", proc.getDate()
 		
 	def stringToProcess(self, string):
-		string = string[:-2]
+		string = string[:-1]
 		attributes = string.split(";")
 
-		type_of_process = attributes[0];
-
+		
 		# Distincion de Procesos.
-		if type_of_process == "hacer_llamada":
+		if int(attributes[2]) == 1 or int(attributes[2]) == 2:
 			nextProcess = Call(attributes)
 
-		elif type_of_process == "recibir_llamada":
-			nextProcess = Call(attributes) 
-
-		elif type_of_process == "enviar_mensajes":
+		elif int(attributes[2]) == 3 or int(attributes[2]) == 4:
 			nextProcess = Message(attributes) 
 
-		elif type_of_process == "recibir_mensajes":
-			nextProcess = Message(attributes) 
-
-		elif type_of_process == "nuevo_contacto":
+		elif int(attributes[2]) == 5:
 			nextProcess = NewContact(attributes) 
 
 		else:
 			nextProcess = Process(attributes) 
-
-
-
-		self.nextID += 1
 
 		return nextProcess
 
