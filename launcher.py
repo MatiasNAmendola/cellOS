@@ -1,8 +1,4 @@
 from proceso import Process
-from llamada import *
-from mensaje import *
-from agenda import *
-
 
 def loadFromFile(filePath):	
 	lines = []
@@ -31,8 +27,6 @@ class Launcher:
 	def stringToProcess(self, string):
 		string = string[:-1]
 		attributes = string.split(";")
-
-		
 		# Distincion de Procesos.
 		if int(attributes[2]) == 1 or int(attributes[2]) == 2:
 			nextProcess = Call(attributes)
