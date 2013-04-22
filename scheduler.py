@@ -24,3 +24,9 @@ class Scheduler:
 			return True
 		else:
 			return False
+
+	def nextReady(self):
+		if len(self.readyList)!=0:
+			return self.readyList[0]
+		else:
+			return
