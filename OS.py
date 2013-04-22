@@ -1,6 +1,7 @@
 from scheduler import Scheduler
 from dispatcher import Dispatcher
 from proceso import Process
+from display import *
 
 class OS:
 	
@@ -10,6 +11,7 @@ class OS:
 		self.time = 0
 		self.runningProcess = None
 		self.lastID = 0
+		self.display = Display()
 
 
 	def getProcesses(self, nextProcessesList):
@@ -71,4 +73,7 @@ class OS:
 
 	def tick(self):
 		self.time+=1
+	
+	def top(self):
+		self.display.top(self.getReadyList())
 
