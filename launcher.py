@@ -1,8 +1,4 @@
 from proceso import Process
-from llamada import *
-from mensaje import *
-from agenda import *
-
 
 def loadFromFile(filePath):	
 	lines = []
@@ -34,29 +30,27 @@ class Launcher:
 
 		type_of_process = attributes[0];
 
-		# Distincion de Procesos.
+		# Distinción de Procesos.
 		if type_of_process == "hacer_llamada":
 			nextProcess = Call(attributes)
 
-		elif type_of_process == "recibir_llamada":
+		else if type_of_process == "recibir_llamada":
 			nextProcess = Call(attributes) 
 
-		elif type_of_process == "enviar_mensajes":
+		else if type_of_process == "enviar_mensajes":
 			nextProcess = Message(attributes) 
 
-		elif type_of_process == "recibir_mensajes":
+		else if type_of_process == "recibir_mensajes":
 			nextProcess = Message(attributes) 
 
-		elif type_of_process == "nuevo_contacto":
+		else if type_of_process == "nuevo_contacto":
 			nextProcess = NewContact(attributes) 
 
 		else:
 			nextProcess = Process(attributes) 
 
 
-
 		self.nextID += 1
-
 		return nextProcess
 
 	def getNextProcesses(self, count):

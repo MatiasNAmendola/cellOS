@@ -23,6 +23,8 @@ class OS:
 	def run(self):
 
 		runningProcess = self.runningProcess
+		scheduler = self.scheduler
+		dispatcher = self.dispatcher
 		# Revisamos si hay proceso running
 		if runningProcess != None:
 			
@@ -35,14 +37,21 @@ class OS:
 				else:
 					return
 
-			# Revisar si existe algun proceso con mayor prioridad
-			if runningProcess.getPriority() > scheduler.nextReady().getPriority():
-				dispatcher.save(runningProcess)
-				scheduler.schedule(runningProcess)
-				runningProcess = scheduler.dequeReady()
-				dispatcher.load(runningProcess)
+			if ~self.scheduler.isEmpty():
+				# Revisar si existe algun proceso con mayor prioridad
+				if runningProcess.getPriority() > scheduler.nextReady().getPriority():
+					dispatcher.save(runningProcess)
+					scheduler.schedule(runningProcess)
+					runningProcess = scheduler.dequeReady()
+					dispatcher.load(runningProcess)
 
 			runningProcess.elapsedTime+=1
+
+		else:
+			if  self.scheduler.isEmpty() == False:
+				runningProcess = scheduler.dequeReady()
+				dispatcher.load(runningProcess)
+				runningProcess.elapsedTime+=1
 
 
 	def getReadyList(self):

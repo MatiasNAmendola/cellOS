@@ -48,8 +48,8 @@ def cycle(counter, os, launcher):
 
 
 if __name__ == '__main__':
-	filePath = raw_input("Write file name for loading \n")
-	launcher = Launcher(filePath)
+	#filePath = raw_input("Write file name for loading \n")
+	launcher = Launcher("example.txt")
 	counter = 0
 	root = Tk()
 	app = GUI(root)
