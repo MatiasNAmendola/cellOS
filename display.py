@@ -40,6 +40,28 @@ class Display:
 				self.printProcess(proc, False)
 		print "---------------------------"
 
+	def displayMenu(self, actualDate):
+		print "...::: ACTIONS :::..."
+		print " (1) Hacer llamada"
+		print " (2) Enviar Mensaje"
+		print " (3) Agregar Contacto"
+		option = raw_input("Enter an Option: ")
+
+		#Flujo
+		if option == 1:
+			number = raw_input("Enter a number: ")
+			call = Call(number,actualDate)
+
+		elif option == 2:
+			number = raw_input("Enter a number: ")
+			mesage = raw_input("Enter your text: ")
+		
+		elif option == 3:
+			cName = raw_input("Enter contact name:")
+			cNumber = raw_input("Enter contact number: ")
+
+		
+
 	def displayCurrentProcess(self, proc):
 		print "Screen:"
 		if proc == None:

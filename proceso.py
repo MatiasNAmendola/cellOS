@@ -11,7 +11,32 @@ class Process:
 		else:
 			self.totalTime = attributes[4]
 		self.elapsedTime = 0
+	
+	def __init__(self, typeOfProcess,actualDate):
+		self.id = 0
 		
+		#Hacer llamada
+		if typeOfProcess == 1: 
+			self.name = "Llamando desde display"
+			self.date = actualDate
+			self.type= typeOfProcess
+			self.priority = 0
+			self.elapsedTime = 1
+
+		elif typeOfProcess == 3:
+			self.name = "Enviando mensaje desde display"
+			self.date = actualDate
+			self.type= typeOfProcess
+			self.priority = 1
+			self.elapsedTime = 1
+
+		elif typeOfProcess == 5:
+			self.name = "Agregando contacto desde display"
+			self.date = actualDate
+			self.type= typeOfProcess
+			self.priority = 3
+			self.elapsedTime = 1
+
 
 	def getName(self):
 		return self.name
