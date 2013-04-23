@@ -1,5 +1,4 @@
 class Process:
-
 	def __init__(self, attributes):
 		if attributes[0]:
 			self.id = 0
