@@ -31,7 +31,6 @@ class Display:
 
 	def top(self, originalList):
 		readyList = originalList[:]
-		self.cls()
 		print "ID,Name,Status, Date, Type, Priority, Elapsed Time, Total Time"
 		if readyList != None:
 			self.printProcess(readyList[0], True)
@@ -47,18 +46,27 @@ class Display:
 		print " (3) Agregar Contacto"
 		option = raw_input("Enter an Option: ")
 
-		#Flujo
-		if option == 1:
-			number = raw_input("Enter a number: ")
-			call = Call(number,actualDate)
+		if option != None:
+			if option == 1:
+				number = raw_input("Enter a number: ")
+				attributes = [1, actualDate, number]
+				call = Call(attributes)
+				return call
 
-		elif option == 2:
-			number = raw_input("Enter a number: ")
-			mesage = raw_input("Enter your text: ")
-		
-		elif option == 3:
-			cName = raw_input("Enter contact name:")
-			cNumber = raw_input("Enter contact number: ")
+			elif option == 2:
+				number = raw_input("Enter a number: ")
+				mesage = raw_input("Enter your text: ")
+				attributes = [3,actualDate,number,mesage]
+				mess = Message(attributes)
+				return mess
+
+			
+			elif option == 3:
+				cName = raw_input("Enter contact name:")
+				cNumber = raw_input("Enter contact number: ")
+				attributes = [actualDate,cName,cNumber]
+				nContact = NewContact(attributes)
+				return nContact
 
 		
 
