@@ -47,18 +47,27 @@ class Display:
 		print " (3) Agregar Contacto"
 		option = raw_input("Enter an Option: ")
 
-		#Flujo
-		if option == 1:
-			number = raw_input("Enter a number: ")
-			call = Call(number,actualDate)
+		if option != None:
+			if option == 1:
+				number = raw_input("Enter a number: ")
+				attributes = [number, actualDate]
+				call = Call(attributes)
+				return call
 
-		elif option == 2:
-			number = raw_input("Enter a number: ")
-			mesage = raw_input("Enter your text: ")
-		
-		elif option == 3:
-			cName = raw_input("Enter contact name:")
-			cNumber = raw_input("Enter contact number: ")
+			elif option == 2:
+				number = raw_input("Enter a number: ")
+				mesage = raw_input("Enter your text: ")
+				attributes = [number, message, actualDate]
+				mess = Message(attributes)
+				return mess
+
+			
+			elif option == 3:
+				cName = raw_input("Enter contact name:")
+				cNumber = raw_input("Enter contact number: ")
+				attributes = [cName,cNumber,actualDate]
+				nContact = NewContact(attributes)
+				return nContact
 
 		
 
