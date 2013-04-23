@@ -49,14 +49,14 @@ class Display:
 		if option != None:
 			if option == 1:
 				number = raw_input("Enter a number: ")
-				attributes = [number, actualDate]
+				attributes = [1, actualDate, number]
 				call = Call(attributes)
 				return call
 
 			elif option == 2:
 				number = raw_input("Enter a number: ")
 				mesage = raw_input("Enter your text: ")
-				attributes = [number, message, actualDate]
+				attributes = [3,actualDate,number,mesage]
 				mess = Message(attributes)
 				return mess
 
@@ -64,7 +64,7 @@ class Display:
 			elif option == 3:
 				cName = raw_input("Enter contact name:")
 				cNumber = raw_input("Enter contact number: ")
-				attributes = [cName,cNumber,actualDate]
+				attributes = [actualDate,cName,cNumber]
 				nContact = NewContact(attributes)
 				return nContact
 
