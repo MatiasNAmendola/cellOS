@@ -44,8 +44,8 @@ class Display:
 		print " (1) Hacer llamada"
 		print " (2) Enviar Mensaje"
 		print " (3) Agregar Contacto"
-		option = int(raw_input("Enter an Option: "))
-	#	option = None
+	#	option = int(raw_input("Enter an Option: "))
+		option = None
 
 		if option != None:
 			if option == 1:
@@ -100,7 +100,7 @@ class Display:
 		self.lostCalls.append(LostCall(call))
 		
 	def displayLostCalls(self):
-		for i in range(len(self.lostCalls)):
+		for i in range(len(self.lostCalls)-1,-1,-1):
 			print "***LOST CALL FROM ", self.lostCalls[i].call.getNumber(), "***"
 			if self.lostCalls[i].counter == 0:
 				del self.lostCalls[i]

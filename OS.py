@@ -3,6 +3,7 @@ from dispatcher import Dispatcher
 from proceso import Process
 from display import *
 import time
+import threading
 
 class OS:
 	
@@ -13,8 +14,11 @@ class OS:
 		self.runningProcess = None
 		self.lastID = 0
 		self.display = Display()
+		self.inpThread = threading.Thread(target = self.inputThreadRun)
 
-
+	def inputThreadRun(self):
+		a = 1
+		
 	def getProcesses(self, nextProcessesList):
 		#Agregar procesos desde display
 		self.display.cls()

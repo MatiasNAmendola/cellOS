@@ -10,18 +10,7 @@ def loadFromFile(filePath):
 
 class NewContact(Process):
 	def __init__(self, attributes):
-<<<<<<< HEAD
-		if attributes[0]:
-			Process.__init__(self, attributes)
-			self.totalTime = 0
-			self.contactName = attributes[4]
-			self.contactNumber = attributes[5]
-		else:
-			
-		
-		
-	
-=======
+
 		Process.__init__(self, attributes)
 		self.totalTime = 0
 		self.contactName = attributes[4]
@@ -77,5 +66,4 @@ class ContactBook:
 		return self.book[self.currentContact]
 
 
-			
->>>>>>> f038b1c2635286181899441b3bac3014be12cb46
+
