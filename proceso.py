@@ -36,7 +36,6 @@ class Process:
 				self.priority = 3
 
 
-
 	def getName(self):
 		return self.name
 		

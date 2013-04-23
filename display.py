@@ -42,8 +42,9 @@ class Display:
 	def displayMenu(self, actualDate):
 		print "...::: ACTIONS :::..."
 		print " (1) Hacer llamada"
-		print " (2) Enviar Mensaje"
-		print " (3) Agregar Contacto"
+		print " (2) Cortar llamada"
+		print " (3) Enviar Mensaje"
+		print " (4) Agregar Contacto"
 	#	option = int(raw_input("Enter an Option: "))
 		option = None
 
@@ -54,7 +55,10 @@ class Display:
 				call = Call(attributes)
 				return call
 
-			elif option == 2:
+			elif option == 2
+			    return -1
+
+			elif option == 3:
 				number = raw_input("Enter a number: ")
 				message = raw_input("Enter your text: ")
 				attributes = [False, 3,actualDate,number,message]
@@ -62,12 +66,14 @@ class Display:
 				return mess
 
 			
-			elif option == 3:
+			elif option == 4:
 				cName = raw_input("Enter contact name:")
 				cNumber = raw_input("Enter contact number: ")
 				attributes = [False, 3, actualDate,cName,cNumber]
 				nContact = NewContact(attributes)
 				return nContact
+
+			
 
 		
 

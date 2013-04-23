@@ -24,7 +24,14 @@ class OS:
 		self.display.cls()
 		displayProc = self.display.displayMenu(time)
 		if(displayProc != None):
-		   nextProcessesList.append(displayProc)
+			if type(displayProc) is int:
+				if displayProc == -1:
+					if(runningProcess != None):
+						if(runningProcess.type == 1 or runningProcess.type == 2):
+							runningProcess.totalTime = runningProcess.elapsedTime
+
+			else:
+		   		nextProcessesList.append(displayProc)
 
 		#Revisar lista de todos los procesos que llegaron
 		if nextProcessesList != None:
