@@ -9,9 +9,12 @@ class Process:
 			self.fromFile = attributes[0]
 			if self.type == 7:
 				self.totalTime = 2
+			elif self.type == 1 or self.type ==2:
+				self.totalTime = attributes[6]
 			else:
 				self.totalTime = attributes[5]
-				self.elapsedTime = 0
+			
+			self.elapsedTime = 0
 	
 		else:
 			self.id = 0

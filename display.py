@@ -26,7 +26,7 @@ class Display:
 			status = "Ready"
 			if isRunning:
 				status = "Running"
-			print proc.id, proc.name, status, proc.date, proc.type, proc.priority, proc.elapsedTime
+			print proc.id, proc.name, status, proc.date, proc.type, proc.priority, proc.elapsedTime, proc.totalTime
 
 
 	def top(self, originalList):
@@ -45,8 +45,7 @@ class Display:
 		print " (2) Cortar llamada"
 		print " (3) Enviar Mensaje"
 		print " (4) Agregar Contacto"
-	#	option = int(raw_input("Enter an Option: "))
-		option = None
+		option = int(raw_input("Enter an Option: "))
 
 		if option != None:
 			if option == 1:
@@ -55,8 +54,8 @@ class Display:
 				call = Call(attributes)
 				return call
 
-			elif option == 2
-			    return -1
+			elif option == 2:
+				return -1
 
 			elif option == 3:
 				number = raw_input("Enter a number: ")

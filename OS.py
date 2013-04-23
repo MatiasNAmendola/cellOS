@@ -20,6 +20,7 @@ class OS:
 
 	def inputThreadRun(self):
 		while True:
+			i
 		
 		
 	def getProcesses(self, nextProcessesList):
@@ -31,10 +32,10 @@ class OS:
 				if displayProc == -1:
 					if(runningProcess != None):
 						if(runningProcess.type == 1 or runningProcess.type == 2):
-							runningProcess.totalTime = runningProcess.elapsedTime
+							runningProcess.totalTime = runningProcess.elapsedTime+1
 
 			else:
-		   		nextProcessesList.append(displayProc)
+				nextProcessesList.append(displayProc)
 
 		#Revisar lista de todos los procesos que llegaron
 		if nextProcessesList != None:

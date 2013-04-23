@@ -1,5 +1,5 @@
 angry_birds;1;9;8;15
-hacer_llamada;5;1;0;2277567;10
+hacer_llamada1;5;1;0;2277567;10
 recibir_llamada;7;2;0;2277567;15
 recibir_llamada;8;2;0;2277567;15
 recibir_llamada;9;2;0;2277567;15
