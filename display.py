@@ -31,7 +31,6 @@ class Display:
 
 	def top(self, originalList):
 		readyList = originalList[:]
-		self.cls()
 		print "ID,Name,Status, Date, Type, Priority, Elapsed Time, Total Time"
 		if readyList != None:
 			self.printProcess(readyList[0], True)
