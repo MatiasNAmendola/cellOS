@@ -19,12 +19,13 @@ class Contact:
 	def __init__(self,name,number):
 		self.name=name
 		self.number=number
+	def contactToString(self):
+		print self.name+": "+self.number
 
 class ContactBook:
 	def __init__(self):
 		self.book=[]
-		#Leer desde archivo
-
+		self.loadContacts()
 
 	def saveContact(self,name,number):
 
@@ -32,7 +33,7 @@ class ContactBook:
 		io.write("\n"+name+";"+number)
 		io.close()
 		self.loadContacts()
-
+		
 
 	def loadContacts(self):
 		self.book=[]
@@ -41,6 +42,27 @@ class ContactBook:
 			attributes = string.split(";")
 			newCont=Contact(attributes[0],attributes[1])
 			self.book.append(newCont)
+		self.currentContact=0
+
+	def navContact(self,movedown):
+
+		largo=len(self.book)
+		if movedown==True:
+			if largo<=0:
+				return
+			elif self.currentContact>=largo-1:
+				self.currentContact=0
+			else:
+				self.currentContact+=1
+
+		else:
+			if largo<=0:
+				return
+			elif self.currentContact<=0:
+				self.currentContact=largo-1
+			else:
+				self.currentContact-=1
+		return self.book[self.currentContact]
 
 
 			
