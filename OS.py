@@ -18,7 +18,7 @@ class OS:
 	def getProcesses(self, nextProcessesList):
 		#Agregar procesos desde display
 		displayProc = self.display.displayMenu(time)
-		if(displayProc != None)
+		if(displayProc != None):
 		   nextProcessesList.append(displayProc)
 
 		#Revisar lista de todos los procesos que llegaron
