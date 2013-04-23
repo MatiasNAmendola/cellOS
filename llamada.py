@@ -5,17 +5,21 @@ class Call(Process):
 
 
 	def __init__(self, attributes):
-		if len(attributes)>3:
+		if attributes[0]:
 			Process.__init__(self, attributes)
-			self.isIncoming = True
-			if int(attributes[2]) == 1:
+			if int(attributes[3]) == 1:
 				self.isIncoming = False
-				self.phoneNumber = attributes[4]
-				self.totalTime = attributes[5]
+				self.phoneNumber = attributes[5]
+			
+			else:
+				self.isIncoming = True
+				self.phoneNumber = attributes[5]
+				
+				
 		else:
 			Process.__init__(self, attributes)
 			self.isIncoming = False
-			self.phoneNumber = number
+			self.phoneNumber = attributes[3]
 
 	def getNumber(self):
 		return self.phoneNumber

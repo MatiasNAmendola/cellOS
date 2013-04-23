@@ -1,41 +1,40 @@
 class Process:
 	def __init__(self, attributes):
-		if len(attributes)>2:
+		if attributes[0]:
 			self.id = 0
-			self.name = attributes[0]
-			self.date = int(attributes[1])
-			self.type= int(attributes[2])
-			self.priority = int(attributes[3])
+			self.name = attributes[1]
+			self.date = int(attributes[2])
+			self.type= int(attributes[3])
+			self.priority = int(attributes[4])
+			self.fromFile = attributes[0]
 			if self.type == 7:
 				self.totalTime = 2
 			else:
-				self.totalTime = attributes[4]
+				self.totalTime = attributes[5]
 				self.elapsedTime = 0
 	
 		else:
 			self.id = 0
-		
-			#Hacer llamada
-			if attributes[0] == 1: 
+			self.fromFile = False
+			self.date = attributes[2]
+			self.type= attributes[1]
+			self.elapsedTime = 0
+			self.totalTime = 1
+			
+			if attributes[1] == 1: 
 				self.name = "Llamando desde display"
-				self.date = attributes[1]
-				self.type= attributes[0]
 				self.priority = 0
-				self.elapsedTime = 1
 
-			elif attributes[0] == 3:
+
+			elif attributes[1] == 3:
 				self.name = "Enviando mensaje desde display"
-				self.date = attributes[1]
-				self.type= attributes[0]
 				self.priority = 1
-				self.elapsedTime = 1
+		
 
-			elif attributes[0] == 5:
+			elif attributes[1] == 5:
 				self.name = "Agregando contacto desde display"
-				self.date = attributes[1]
-				self.type= attributes[0]
 				self.priority = 3
-				self.elapsedTime = 1
+
 
 
 	def getName(self):

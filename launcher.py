@@ -31,14 +31,15 @@ class Launcher:
 	def stringToProcess(self, string):
 		string = string[:-1]
 		attributes = string.split(";")
+		attributes.insert(0, True)
 		# Distincion de Procesos.
-		if int(attributes[2]) == 1 or int(attributes[2]) == 2:
+		if int(attributes[3]) == 1 or int(attributes[3]) == 2:
 			nextProcess = Call(attributes)
 
-		elif int(attributes[2]) == 3 or int(attributes[2]) == 4:
+		elif int(attributes[3]) == 3 or int(attributes[3]) == 4:
 			nextProcess = Message(attributes) 
 
-		elif int(attributes[2]) == 5:
+		elif int(attributes[3]) == 5:
 			nextProcess = NewContact(attributes) 
 
 		else:

@@ -26,7 +26,7 @@ class Display:
 			status = "Ready"
 			if isRunning:
 				status = "Running"
-			print proc.id, proc.name, status, proc.date, proc.type, proc.priority, proc.elapsedTime, proc.totalTime
+			print proc.id, proc.name, status, proc.date, proc.type, proc.priority, proc.elapsedTime
 
 
 	def top(self, originalList):
@@ -44,19 +44,20 @@ class Display:
 		print " (1) Hacer llamada"
 		print " (2) Enviar Mensaje"
 		print " (3) Agregar Contacto"
-		option = raw_input("Enter an Option: ")
+	#	option = int(raw_input("Enter an Option: "))
+		option = None
 
 		if option != None:
 			if option == 1:
 				number = raw_input("Enter a number: ")
-				attributes = [1, actualDate, number]
+				attributes = [False, 1, actualDate, number]
 				call = Call(attributes)
 				return call
 
 			elif option == 2:
 				number = raw_input("Enter a number: ")
-				mesage = raw_input("Enter your text: ")
-				attributes = [3,actualDate,number,mesage]
+				message = raw_input("Enter your text: ")
+				attributes = [False, 3,actualDate,number,message]
 				mess = Message(attributes)
 				return mess
 
@@ -64,7 +65,7 @@ class Display:
 			elif option == 3:
 				cName = raw_input("Enter contact name:")
 				cNumber = raw_input("Enter contact number: ")
-				attributes = [actualDate,cName,cNumber]
+				attributes = [False, 3, actualDate,cName,cNumber]
 				nContact = NewContact(attributes)
 				return nContact
 
@@ -99,7 +100,7 @@ class Display:
 		self.lostCalls.append(LostCall(call))
 		
 	def displayLostCalls(self):
-		for i in range(len(self.lostCalls)):
+		for i in range(len(self.lostCalls)-1,-1,-1):
 			print "***LOST CALL FROM ", self.lostCalls[i].call.getNumber(), "***"
 			if self.lostCalls[i].counter == 0:
 				del self.lostCalls[i]

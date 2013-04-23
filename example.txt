@@ -1,6 +1,9 @@
 angry_birds;1;9;8;15
 hacer_llamada;5;1;0;2277567;10
 recibir_llamada;7;2;0;2277567;15
+recibir_llamada;8;2;0;2277567;15
+recibir_llamada;9;2;0;2277567;15
+recibir_llamada;11;2;0;2277567;15
 recibir_mensajes;6;4;2;2277567;Hola
 recibir_mensajes;9;4;2;2277567;Alo?
 recibir_llamada;12;2;0;94181333;15

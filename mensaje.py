@@ -10,14 +10,20 @@ def getSendingTime(string):
 class Message(Process):
 
     def __init__(self, attributes):
-		Process.__init__(self, attributes)
-		self.isIncoming = True
-		if int(attributes[2]) == 3:
+		if attributes[0]:
+			Process.__init__(self, attributes)
+			self.isIncoming = True
+			if int(attributes[3]) == 3:
+				self.isIncoming = False
+			self.phoneNumber = attributes[5]
+			self.text = attributes[6]
+			self.totalTime = getSendingTime(self.text)
+		else:
+			Process.__init__(self, attributes)
 			self.isIncoming = False
-		self.phoneNumber = attributes[4]
-		self.text = attributes[5]
-		self.totalTime = getSendingTime(self.text)
-
+			self.phoneNumber = attributes[3]
+			self.text = attributes[4]
+			self.totalTime = getSendingTime(self.text)
 
     def getNumber(self):
         return self.phoneNumber

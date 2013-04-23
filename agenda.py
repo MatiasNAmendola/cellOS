@@ -10,6 +10,7 @@ def loadFromFile(filePath):
 
 class NewContact(Process):
 	def __init__(self, attributes):
+
 		Process.__init__(self, attributes)
 		self.totalTime = 0
 		self.contactName = attributes[4]
@@ -67,8 +68,6 @@ class ContactBook:
 	def remContact(self,contact):
 		index =0
 		for cont in self.book:
-			
-
 			if cont.name==contact.name:
 				del self.book[index]
 			index+=1
