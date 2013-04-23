@@ -15,9 +15,12 @@ class OS:
 		self.lastID = 0
 		self.display = Display()
 		self.inpThread = threading.Thread(target = self.inputThreadRun)
+		self.inpThread.daemon = True
+		self.inpThread.start()
 
 	def inputThreadRun(self):
-		a = 1
+		while True:
+		
 		
 	def getProcesses(self, nextProcessesList):
 		#Agregar procesos desde display

@@ -1,7 +1,6 @@
 from proceso import *
 from launcher import *
 import time
-import threading
 from OS import *
 
 
