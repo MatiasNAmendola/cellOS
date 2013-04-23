@@ -31,7 +31,7 @@ class ContactBook:
 	def saveContact(self,name,number):
 
 		io=open("contacts.txt", 'a')
-		io.write("\n"+name+";"+number)
+		io.write(name+";"+number+"\n")
 		io.close()
 		self.loadContacts()
 		
@@ -65,5 +65,12 @@ class ContactBook:
 				self.currentContact-=1
 		return self.book[self.currentContact]
 
-
-
+	def remContact(self,contact):
+		index =0
+		for cont in self.book:
+			if cont.name==contact.name:
+				del self.book[index]
+			index+=1
+		io = open("contacts.txt", 'w')
+		for cont in self.book:
+			io.write(cont.name+";"+cont.number)
