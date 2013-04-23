@@ -31,6 +31,7 @@ class Launcher:
 	def stringToProcess(self, string):
 		string = string[:-1]
 		attributes = string.split(";")
+		attributes.insert(0, True)
 		# Distincion de Procesos.
 		if int(attributes[2]) == 1 or int(attributes[2]) == 2:
 			nextProcess = Call(attributes)
