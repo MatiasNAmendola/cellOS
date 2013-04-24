@@ -66,11 +66,13 @@ class OS:
 							self.runningProcess.elapsedTime = int(self.runningProcess.totalTime)+1
 
 			else:
-				
-				nextProcessesList.append(displayProc)
+				if displayProc.type != 1:
+					if runningProcess != None:
+						if runningProcess.type != 1 or runningProcess.type != 2:
+							nextProcessesList.append(displayProc)
 
 		self.procFromDisplay = None
-
+		displ = None
 		#Revisar lista de todos los procesos que llegaron
 		if nextProcessesList != None:
 			for proc in nextProcessesList:
