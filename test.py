@@ -1,14 +1,17 @@
 from agenda import *
 
 book=ContactBook()
+
+i=3
+print type(i)
 #book.loadContacts()
 #book.saveContact("pancho","984589y85")
-toRemove=Contact("pato","2405")
-book.remContact(toRemove)
+#toRemove=Contact("pato","2405")
+#book.remContact(toRemove)
 
 
-for  contact in book.book:
-	print contact.name
+#for  contact in book.book:
+#	print contact.name
 
 #toRemove=Contact("pancho","894320")
 

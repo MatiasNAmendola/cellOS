@@ -1,8 +1,6 @@
-charly;25455
-wilson;4545
 andres;3252545
 diego;2355
 tomas;3124345
 pedro;314432342
 pepe;314432342
-moncho;314432342
+juancho;314432342
