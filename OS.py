@@ -66,10 +66,15 @@ class OS:
 							self.runningProcess.elapsedTime = int(self.runningProcess.totalTime)+1
 
 			else:
-				if displayProc.type != 1:
-					if runningProcess != None:
-						if runningProcess.type != 1 or runningProcess.type != 2:
+				if displayProc.type == 1:
+					if self.runningProcess != None:
+						if self.runningProcess.type != 1 and self.runningProcess.type != 2: 
 							nextProcessesList.append(displayProc)
+					
+					else:
+						nextProcessesList.append(displayProc)
+				else:
+					nextProcessesList.append(displayProc)
 
 		self.procFromDisplay = None
 		displayProc = None
