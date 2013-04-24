@@ -143,4 +143,5 @@ class OS:
 		
 		output= self.menu + "\n" +self.display.getTop(self.getReadyList())
 		print output
+		self.displayCurrentProcess()
 
