@@ -20,8 +20,8 @@ def cycle(counter, os, launcher):
 	
 
 if __name__ == '__main__':
-	#filePath = raw_input("Write file name for loading \n")
-	launcher = Launcher("example.txt")
+	filePath = raw_input("Write file name for loading \n")
+	launcher = Launcher(filePath)
 	counter = 0
 	opS = OS()
 	cycle (counter, opS, launcher)
