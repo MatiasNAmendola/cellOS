@@ -6,7 +6,7 @@ import time
 import threading
 
 class OS:
-	
+
 	def __init__(self):
 		self.scheduler = Scheduler()
 		self.dispatcher = Dispatcher()
@@ -17,25 +17,60 @@ class OS:
 		self.inpThread = threading.Thread(target = self.inputThreadRun)
 		self.inpThread.daemon = True
 		self.inpThread.start()
+		self.procFromDisplay = None
+		self.menu ="...::: ACTIONS :::...\n" + " (1) Hacer llamada\n" +" (2) Cortar llamada\n"+" (3) Enviar Mensaje\n"+" (4) Agregar Contacto\n"
 
 	def inputThreadRun(self):
 		while True:
-			i
+
+			option = int(raw_input("Enter an Option: "))
+
+			if option != None:
+				if option == 1:
+					number = raw_input("Enter a number: ")
+					attributes = [False, 1, self.time, number]
+					call = Call(attributes)
+					self.procFromDisplay = call
+
+				elif option == 2:
+					return -1
+
+				elif option == 3:
+					number = raw_input("Enter a number: ")
+					message = raw_input("Enter your text: ")
+					attributes = [False, 3,self.time,number,message]
+					mess = Message(attributes)
+					self.procFromDisplay = mess
+
+				
+				elif option == 4:
+					cName = raw_input("Enter contact name:")
+					cNumber = raw_input("Enter contact number: ")
+					attributes = [False, 5, self.time,cName,cNumber]
+					nContact = NewContact(attributes)
+					self.procFromDisplay = nContact
 		
 		
 	def getProcesses(self, nextProcessesList):
 		#Agregar procesos desde display
 		self.display.cls()
-		displayProc = self.display.displayMenu(time)
+		#displayProc = self.display.displayMenu(time)
+		displayProc = self.procFromDisplay
+		print self.procFromDisplay
+		time.sleep(2)
 		if(displayProc != None):
+			time.sleep(13)
 			if type(displayProc) is int:
 				if displayProc == -1:
 					if(runningProcess != None):
 						if(runningProcess.type == 1 or runningProcess.type == 2):
+
 							runningProcess.totalTime = runningProcess.elapsedTime+1
 
 			else:
 				nextProcessesList.append(displayProc)
+
+		self.procFromDisplay = None
 
 		#Revisar lista de todos los procesos que llegaron
 		if nextProcessesList != None:
@@ -77,6 +112,9 @@ class OS:
 
 			if self.runningProcess != None:
 				self.runningProcess.elapsedTime+=1
+				if self.runningProcess.type== 1:
+					if self.runningProcess.fromFile == False:
+						self.runningProcess.totalTime+=1
 
 		else:
 			if  self.scheduler.isEmpty() == False:
@@ -101,4 +139,9 @@ class OS:
 	
 	def displayCurrentProcess(self):
 		self.display.displayCurrentProcess(self.runningProcess)
+
+	def updateDisplay(self):
+		
+		output= self.menu + "\n" +self.display.getTop(self.getReadyList())
+		print output
 

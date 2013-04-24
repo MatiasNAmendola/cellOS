@@ -40,11 +40,11 @@ class Display:
 		print "---------------------------"
 
 	def displayMenu(self, actualDate):
-		print "...::: ACTIONS :::..."
-		print " (1) Hacer llamada"
-		print " (2) Cortar llamada"
-		print " (3) Enviar Mensaje"
-		print " (4) Agregar Contacto"
+		#print "...::: ACTIONS :::..."
+		#print " (1) Hacer llamada"
+		#print " (2) Cortar llamada"
+		#print " (3) Enviar Mensaje"
+		#print " (4) Agregar Contacto"
 		option = int(raw_input("Enter an Option: "))
 
 		if option != None:
@@ -111,7 +111,32 @@ class Display:
 				del self.lostCalls[i]
 			else:
 				self.lostCalls[i].counter -=1
-			
+
+	def getProcessLine(self, proc, isRunning):
+		if proc != None:
+			status = "Ready"
+			if isRunning:
+				status = "Running"
+			out = str(proc.id)+" "+str(proc.name)+" "+ str(status)+" "+ str(proc.date)+" "+ str(proc.type)+" "+ str(proc.priority)+" "+ str(proc.elapsedTime)+" "+ str(proc.totalTime)
+			return out
+		return ""
+
+	
+	def getTop(self,originalList):
+		readyList = originalList[:]
+		output = "ID,Name,Status, Date, Type, Priority, Elapsed Time, Total Time"
+		if readyList != None:
+			output+="\n"+self.getProcessLine(readyList[0], True)
+			del readyList[0]
+			for proc in readyList:
+				output+="\n"+self.getProcessLine(proc, False)
+		
+		output+="\n"+"---------------------------"
+		return output
+
+	
+
+
 		
 
 
