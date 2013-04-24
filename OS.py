@@ -63,8 +63,6 @@ class OS:
 				if displayProc == -1:
 					if(self.runningProcess != None):
 						if(self.runningProcess.type == 1 or self.runningProcess.type == 2):
-							print "entra"
-							time.sleep(3)
 							self.runningProcess.elapsedTime = int(self.runningProcess.totalTime)+1
 
 			else:
@@ -145,4 +143,5 @@ class OS:
 		
 		output= self.menu + "\n" +self.display.getTop(self.getReadyList())
 		print output
+		self.displayCurrentProcess()
 
