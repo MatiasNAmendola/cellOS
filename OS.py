@@ -33,7 +33,7 @@ class OS:
 					self.procFromDisplay = call
 
 				elif option == 2:
-					return -1
+					self.procFromDisplay= -1
 
 				elif option == 3:
 					number = raw_input("Enter a number: ")
@@ -56,18 +56,19 @@ class OS:
 		self.display.cls()
 		#displayProc = self.display.displayMenu(time)
 		displayProc = self.procFromDisplay
-		print self.procFromDisplay
-		time.sleep(2)
+		#print self.procFromDisplay
+		#
 		if(displayProc != None):
-			time.sleep(13)
 			if type(displayProc) is int:
 				if displayProc == -1:
-					if(runningProcess != None):
-						if(runningProcess.type == 1 or runningProcess.type == 2):
-
-							runningProcess.totalTime = runningProcess.elapsedTime+1
+					if(self.runningProcess != None):
+						if(self.runningProcess.type == 1 or self.runningProcess.type == 2):
+							print "entra"
+							time.sleep(3)
+							self.runningProcess.elapsedTime = int(self.runningProcess.totalTime)+1
 
 			else:
+				
 				nextProcessesList.append(displayProc)
 
 		self.procFromDisplay = None
