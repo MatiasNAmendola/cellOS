@@ -70,6 +70,7 @@ class OS:
 				nextProcessesList.append(displayProc)
 
 		self.procFromDisplay = None
+		displayProc = None
 
 		#Revisar lista de todos los procesos que llegaron
 		if nextProcessesList != None:
