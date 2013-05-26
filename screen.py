@@ -1,35 +1,53 @@
 import curses
 import time
 
-class Screen:
-	def __init__(self, screen):
-		self.screen=screen
-		self.height, self.width = self.screen.getmaxyx()
-		self.screen.nodelay(1)
-		self.screen.keypad(1)
+class Input:
+    def __init__(self):
+        self.input=''
+    def set(self,text):
+        self.input=text
+    def get(self):
+        return self.input
 
-	def __exit__(self,screen):
-		self.screen.keypad(0)
+def create_input(screen, title):
+    maxY,maxX=screen.getmaxyx()
+    win = curses.newwin(3, maxX,0,0)
+    win.box()
+    win.move(0, 1)
+    win.addstr(title)
+    win.move(1, 1)
+    win.addstr('->')
+    return win
 
-	def drawHeader(self,text):
-		text=text+'\n\n'
-		self.screen.clear()
-		self.screen.addstr(1, 1, text)
-		self.screen.refresh()
+def create_display(screen,title):
+    maxY,maxX=screen.getmaxyx()
+    win = curses.newwin(maxY-3, maxX,4,0)
+    win.box()
+    win.move(0, 1)
+    win.addstr(title)
+    win.move(1, 1)
+    return win
 
-	def wl(self,text):
-		screen=self.screen
-		curr_y, curr_x = screen.getyx()
-		screen.addstr(curr_y, curr_x ,text)
-		screen.clrtoeol()
-		screen.move(curr_y+1, curr_x)
-		self.screen.refresh()
 
-	def start(self):
-		while 1:
-			key = self.screen.getch()
-			if key == ord('q'): break
-			self.drawHeader("TITULO DEL MENU")
-			self.wl("Linea1")
-			self.wl("Linea2")
-			time.sleep(1)
+def get_string(win):
+    curses.echo()
+    result = win.getstr()
+    curses.echo()
+    return result
+
+def inputLoop(inputPanel,inp):
+    win=inputPanel.window()
+    while 1:
+        win.move(0, 1)
+        win.addstr('Input')
+        win.move(1,3)
+        win.clrtoeol()
+        inp.set(get_string(win))
+        win.move(1,3)
+        win.box()
+
+def wl(screen,text):
+    curr_y, curr_x = screen.getyx()
+    screen.addstr(text)
+    screen.clrtoeol()
+    screen.move(curr_y+1, curr_x)
