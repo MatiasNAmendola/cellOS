@@ -20,7 +20,8 @@ class OS:
 		self.procFromDisplay = None
 		self.actionFromDisplay = 0 #0 = nada, 1 = proceso nuevo, 2 = cortar proceso actual
 		self.menu ="...::: ACTIONS :::...\n" + " (1) Hacer llamada\n" +" (2) Cortar llamada\n"+" (3) Enviar Mensaje\n"+" (4) Agregar Contacto\n"
-		self.lock = Lock()
+		self.lock = threading.Lock()
+		self.nextProcessesList = []
 
 
 	def inputThreadRun(self):
@@ -58,7 +59,7 @@ class OS:
 		if (self.actionFromDisplay == 2 and self.runningProcess != None):
 			if(self.runningProcess.type == 1 or self.runningProcess.type == 2):
 				self.runningProcess.elapsedTime = int(self.runningProcess.totalTime) + 1
-		elif (self.actionFromDisplay == 1)
+		elif (self.actionFromDisplay == 1):
 			self.addProcessToList()
 		
 		self.procFromDisplay = None
@@ -66,8 +67,8 @@ class OS:
 		self.lock.release()
 
 		#Revisar lista de todos los procesos que llegaron
-		if nextProcessesList != None:
-			for proc in nextProcessesList:
+		if self.nextProcessesList != None:
+			for proc in self.nextProcessesList:
 				print "OS received process", proc.getName()
 				accepted = True
 				if self.runningProcess != None:
@@ -83,8 +84,8 @@ class OS:
 					
 		
 	def addProcessToList(self):
-		if !(self.procFromDisplay == 1 and self.runningProcess and (self.runningProcess.type == 1 or self.runningProcess == 2)
-			nextProcessesList.append(self.procFromDisplay)
+		if not (self.procFromDisplay == 1 and self.runningProcess != None and (self.runningProcess.type == 1 or self.runningProcess.type == 2)):
+			self.nextProcessesList.append(self.procFromDisplay)
 
 
 	def run(self):
