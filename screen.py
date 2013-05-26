@@ -41,7 +41,6 @@ def refresh(displayPanel,scr): #loop que pregunta constantemente por un input
 	win=displayPanel.window()
 	lines=scr.lines
 	while 1:
-		#curses.noecho()
 		win.clear()
 		win.move(0, 1)
 		win.addstr('Display')
@@ -53,8 +52,6 @@ def refresh(displayPanel,scr): #loop que pregunta constantemente por un input
 		win.box()
 		win.refresh()
 		curses.panel.update_panels()
-		curses.doupdate()
-		#curses.echo()
 		time.sleep(1)
 
 def wl(screen,text):

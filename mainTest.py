@@ -6,6 +6,7 @@ from screen import *
 
 
 def main(stdscr):
+	curses.curs_set(0)
 	scr=Screen()## Este objeto guarda las lineas a mostrar en el display
 	maxY,maxX=stdscr.getmaxyx()
 	inp = create_input(stdscr,'input')
@@ -35,5 +36,7 @@ def main(stdscr):
 
 
 if __name__ == '__main__':
+
 	curses.wrapper(main)
+	curses.curs_set(1)
 
