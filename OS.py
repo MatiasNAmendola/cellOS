@@ -54,10 +54,6 @@ class OS:
 				self.lock.release()
 		
 	def getProcesses(self, nextProcessesList):
-		#Agregar procesos desde display
-		#displayProc = self.display.displayMenu(time)
-		#print self.procFromDisplay
-		#
 		self.lock.acquire()
 		if (self.actionFromDisplay == 2 and self.runningProcess != None):
 			if(self.runningProcess.type == 1 or self.runningProcess.type == 2):
@@ -87,21 +83,9 @@ class OS:
 					
 		
 	def addProcessToList(self):
-		
-			
-		elif displayProc.type == 1:
-					if self.runningProcess != None:
-						if self.runningProcess.type != 1 and self.runningProcess.type != 2: 
-							nextProcessesList.append(displayProc)
-					
-					else:
-						nextProcessesList.append(displayProc)
-				else:
-					nextProcessesList.append(displayProc)
+		if !(self.procFromDisplay == 1 and self.runningProcess and (self.runningProcess.type == 1 or self.runningProcess == 2)
+			nextProcessesList.append(self.procFromDisplay)
 
-		self.procFromDisplay = None
-
-		displayProc = None
 
 	def run(self):
 		# Revisamos si hay proceso running
