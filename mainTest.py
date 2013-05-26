@@ -6,48 +6,34 @@ from screen import *
 
 
 def main(stdscr):
-	inp=Input()## Este objeto guarda el ultimo input recibido desde inputPanel
+	scr=Screen()## Este objeto guarda las lineas a mostrar en el display
 	maxY,maxX=stdscr.getmaxyx()
-	inputWin = create_input(stdscr,'input')
-	inputPanel=curses.panel.new_panel(inputWin)
+	inp = create_input(stdscr,'input')
+	inputPanel=curses.panel.new_panel(inp)
 	inputPanel.move(0,0)
-	
-	loop = threading.Thread(target=inputLoop, args=(inputPanel,inp))
+	win = create_display(stdscr,'Display')
+	displayPanel=curses.panel.new_panel(win)
+	loop = threading.Thread(target=refresh, args=(displayPanel,scr))
 	loop.daemon = True
 	loop.start()
-
-	win = create_display(stdscr,'Display')
-	menuPanel=curses.panel.new_panel(win)
 	while 1:
-		lastInput=inp.get()
-		win.clear()
-		
-		win.move(0, 1)
-		win.addstr('Display')
-		win.move(1, 1)
-
-		menuPanel.show()
+		curses.echo()
 		inputPanel.show()
-		menuPanel.move(3,0)
-
-		#con wl() se agrega una linea
-		wl(win,inp.get())
-		wl(win,'\n')
-		wl(win,inp.get())
-		wl(win,inp.get())
-		wl(win,inp.get())
-
-		win.box()
-		stdscr.refresh()
-		curses.panel.update_panels()
-		curses.doupdate()
-		time.sleep(1)
+		inp.move(0, 1)
+		inp.addstr('Input')
+		inp.move(1,3)
+		inp.clrtoeol()
+		lastInput=inp.getstr()
+		scr.addLine(lastInput)
+		inp.move(1,3)
+		inp.box()
+		if lastInput=='quit':
+			break
 
 
 
 
 
 if __name__ == '__main__':
-	lastInput='primer input'
 	curses.wrapper(main)
 
