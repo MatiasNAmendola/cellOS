@@ -103,4 +103,12 @@ class OS:
 		output= self.menu + "\n" +self.display.getTop(self.getReadyList())
 		print output
 		self.displayCurrentProcess()
+		
+	def peripheralsAreAvailable(self, process):
+		for i in range(0, 6):
+			if self.runningProcess.peripherals[i] == 3:
+				return False
+			elif self.runningProcess.peripherals[i] == 2 and process.priority < runningProcess.priority:
+				return False
+		return True
 
