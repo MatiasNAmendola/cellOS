@@ -27,11 +27,11 @@ def refresh(displayPanel,scr): #loop refresca el display cada 1 seg
 
 def cycle(os,launcher,displayPanel,scr):
 	counter=0
-	time.sleep(1)
+	time.sleep(0.5)
 	while 1:
+		refresh(displayPanel,scr)
 		os.getProcesses(launcher.getNextProcesses(counter))
 		os.run()
-		refresh(displayPanel,scr)
 		counter+=1
 		time.sleep(1)
 		
@@ -44,6 +44,7 @@ def refreshInput(inp):
 
 def main(stdscr):
 	curses.curs_set(0)
+	curses.echo()
 	scr=Screen()## Este objeto guarda las lineas a mostrar en el display
 	maxY,maxX=stdscr.getmaxyx()
 	inp = create_input(stdscr,'input')
@@ -59,7 +60,7 @@ def main(stdscr):
 	loop.daemon = True
 	loop.start()
 	while 1:
-		curses.echo()
+		time.sleep(1)
 		inputPanel.show()
 		refreshInput(inp)
 		scr.clear()
@@ -126,4 +127,5 @@ if __name__ == '__main__':
 
 	curses.wrapper(main)
 	curses.curs_set(1)
+	curses.echo()
 

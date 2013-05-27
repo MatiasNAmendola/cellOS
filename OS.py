@@ -14,46 +14,12 @@ class OS:
 		self.runningProcess = None
 		self.lastID = 0
 		self.display = Display()
-		self.inpThread = threading.Thread(target = self.inputThreadRun)
-		self.inpThread.daemon = True
-		self.inpThread.start()
 		self.procFromDisplay = None
 		self.actionFromDisplay = 0 #0 = nada, 1 = proceso nuevo, 2 = cortar proceso actual
 		self.menu ="...::: ACTIONS :::...\n" + " (1) Hacer llamada\n" +" (2) Cortar llamada\n"+" (3) Enviar Mensaje\n"+" (4) Agregar Contacto\n"
 		self.lock = threading.Lock()
 		self.nextProcessesList = []
 
-
-	def inputThreadRun(self):
-		while True:
-			option = int(raw_input("Enter an Option: "))
-			if option != None:
-				self.lock.acquire()
-				if option == 1:
-					number = raw_input("Enter a number: ")
-					attributes = [False, 1, self.time, number]
-					call = Call(attributes)
-					self.actionFromDisplay = 1
-					self.procFromDisplay = call
-				elif option == 2:
-					self.actionFromDisplay = 2
-					self.procFromDisplay= -1
-				elif option == 3:
-					number = raw_input("Enter a number: ")
-					message = raw_input("Enter your text: ")
-					attributes = [False, 3,self.time,number,message]
-					mess = Message(attributes)
-					self.procFromDisplay = mess
-					self.actionFromDisplay = 1
-				elif option == 4:
-					cName = raw_input("Enter contact name:")
-					cNumber = raw_input("Enter contact number: ")
-					attributes = [False, 5, self.time,cName,cNumber]
-					nContact = NewContact(attributes)
-					self.procFromDisplay = nContact
-					self.actionFromDisplay = 1
-				self.lock.release()
-		
 	def getProcesses(self, nextProcessesList):
 		self.nextProcessesList = []
 		self.lock.acquire()
@@ -70,7 +36,7 @@ class OS:
 		#Revisar lista de todos los procesos que llegaron
 		if self.nextProcessesList != None:
 			for proc in self.nextProcessesList:
-				print "OS received process", proc.getName()
+				#print "OS received process", proc.getName()
 				accepted = True
 				if self.runningProcess != None:
 					if self.runningProcess.type == 1 or self.runningProcess == 2:
