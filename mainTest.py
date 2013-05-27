@@ -4,6 +4,22 @@ import threading
 from curses import panel
 from screen import *
 
+def refresh(displayPanel,scr): #loop refresca el display cada 1 seg
+	win=displayPanel.window()
+	lines=scr.lines
+	while 1:
+		win.clear()
+		win.move(0, 1)
+		win.addstr('Display')
+		win.move(1, 1)
+		displayPanel.show()
+		displayPanel.move(3,0)
+		for l in lines:
+			wl(win,l)
+		win.box()
+		win.refresh()
+		curses.panel.update_panels()
+		time.sleep(1)
 
 def main(stdscr):
 	curses.curs_set(0)
@@ -24,6 +40,9 @@ def main(stdscr):
 		inp.addstr('Input')
 		inp.move(1,3)
 		inp.clrtoeol()
+		principal={ '1': 'Menu1','2': 'Menu2','9': 'Salir' }
+		stringMenu=writeMenu('MENU PRINCIPAL',principal)
+		scr.addLine(stringMenu)
 		lastInput=inp.getstr()
 		scr.addLine(lastInput)
 		inp.move(1,3)

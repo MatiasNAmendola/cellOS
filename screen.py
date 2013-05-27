@@ -37,25 +37,23 @@ def get_string(win):
 	curses.echo()
 	return result
 
-def refresh(displayPanel,scr): #loop que pregunta constantemente por un input
-	win=displayPanel.window()
-	lines=scr.lines
-	while 1:
-		win.clear()
-		win.move(0, 1)
-		win.addstr('Display')
-		win.move(1, 1)
-		displayPanel.show()
-		displayPanel.move(3,0)
-		for l in lines:
-			wl(win,l)
-		win.box()
-		win.refresh()
-		curses.panel.update_panels()
-		time.sleep(1)
 
 def wl(screen,text):
 	curr_y, curr_x = screen.getyx()
 	screen.addstr(text)
 	screen.clrtoeol()
 	screen.move(curr_y+1, curr_x)
+
+def writeMenu(name,options):
+	output=[]
+	st=''
+	header='::::::'+name+'::::::'
+	output.append(header)
+	for key, v in options.items():
+		st=key+" -> "+v
+		output.append(st)
+	output.append('::::::::::::::::::')
+	strfinal=''
+	for line in output:
+		strfinal=strfinal+line+'\n'
+	return strfinal
