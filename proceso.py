@@ -22,7 +22,7 @@ class Process:
 			self.date = attributes[2]
 			self.type= attributes[1]
 			self.elapsedTime = 0
-			self.totalTime = 1
+			self.totalTime = 2
 			
 			if attributes[1] == 1: 
 				self.name = "Llamando desde display"
