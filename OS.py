@@ -68,7 +68,7 @@ class OS:
 					return
 			if self.scheduler.isEmpty()==False:
 				# Revisar si existe algun proceso con mayor prioridad
-				if self.runningProcess.getPriority() > self.scheduler.nextReady().getPriority():
+				if self.runningProcess.getPriority() > self.scheduler.nextReady().getPriority() and self.peripheralsAreAvailable(self.scheduler.nextReady()):
 					self.dispatcher.save(self.runningProcess)
 					self.scheduler.schedule(self.runningProcess)
 					self.runningProcess = self.scheduler.dequeReady()
@@ -103,4 +103,12 @@ class OS:
 		output= self.menu + "\n" +self.display.getTop(self.getReadyList())
 		print output
 		self.displayCurrentProcess()
+		
+	def peripheralsAreAvailable(self, process):
+		for i in range(0, 6):
+			if self.runningProcess.peripherals[i] == 3:
+				return False
+			elif self.runningProcess.peripherals[i] == 2 and process.getPriority() < runningProcess.getPriority():
+				return False
+		return True
 
