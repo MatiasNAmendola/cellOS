@@ -6,6 +6,7 @@ from screen import *
 from proceso import *
 from launcher import *
 from OS import *
+from llamada import *
 
 
 def refresh(displayPanel,scr): #loop refresca el display cada 1 seg
@@ -64,8 +65,8 @@ def main(stdscr):
 		scr.clear()
 		stringMenu=writeMenu('ACTIONS',{1:'Hacer llamada',2:'Cortar Llamada',3:'Enviar mensaje',4:'Agregar contacto',5:'Mandar Ubicacion',6:'Jugar',7:'Escuchar Musica', 's':'salir' })
 		scr.addLines(stringMenu)
-		top=scr.getTop(opS.getReadyList())
-		scr.addLine(top)
+		top=scr.getTopLines(opS.getReadyList())
+		scr.addLines(top)
 		lastInput=inp.getstr()
 		
 		inp.move(1,3)
@@ -77,7 +78,9 @@ def main(stdscr):
 			scr.clear()
 			scr.addLine("Escriba un numero de telefono")
 			lastInput=inp.getstr()
-			##Aqui lanzar el proceso
+			llamada=Call([False,1,10,lastInput])
+			opS.nextProcessesList.append(llamada)
+
 			
 		elif lastInput=='2':
 			#Aqui cortar llamada

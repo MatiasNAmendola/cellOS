@@ -9,10 +9,7 @@ def cycle(counter, os, launcher):
 	while(~quit):
 		os.getProcesses(launcher.getNextProcesses(counter))
 		os.run()
-		#os.top()
 		os.updateDisplay()
-		#os.displayCurrentProcess()
-		#many things
 		print "I'm counting ", counter
 		counter+=1
 		time.sleep(1)

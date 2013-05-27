@@ -36,6 +36,19 @@ class Screen:
 		output+="\n"+"---------------------------"
 		return output
 
+	def getTopLines(self,originalList):
+		readyList = originalList[:]
+		output=[]
+		output.append("ID,Name,Status, Date, Type, Priority, Elapsed Time, Total Time")
+		if readyList != None:
+			output.append(self.getProcessLine(readyList[0], True))
+			del readyList[0]
+			for proc in readyList:
+				output.append(self.getProcessLine(proc, False))
+		
+		output.append("---------------------------")
+		return output
+
 	def getProcessLine(self, proc, isRunning):
 		if proc != None:
 			status = "Ready"
