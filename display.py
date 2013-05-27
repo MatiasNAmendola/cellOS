@@ -22,29 +22,28 @@ class Display:
 	    operativeSystem.system(['clear','cls'][operativeSystem.name == 'nt'])
 
 	def printProcess(self, proc, isRunning):
+		output=''
 		if proc != None:
 			status = "Ready"
 			if isRunning:
 				status = "Running"
-			print proc.id, proc.name, status, proc.date, proc.type, proc.priority, proc.elapsedTime, proc.totalTime
+			output+= proc.id, proc.name, status, proc.date, proc.type, proc.priority, proc.elapsedTime, proc.totalTime
+			return output
 
 
 	def top(self, originalList):
 		readyList = originalList[:]
-		print "ID,Name,Status, Date, Type, Priority, Elapsed Time, Total Time"
+		output=''
+		output+= "ID,Name,Status, Date, Type, Priority, Elapsed Time, Total Time"
 		if readyList != None:
 			self.printProcess(readyList[0], True)
 			del readyList[0]
 			for proc in readyList:
-				self.printProcess(proc, False)
-		print "---------------------------"
+				output+=self.printProcess(proc, False)
+		output+="---------------------------"
+		return output
 
 	def displayMenu(self, actualDate):
-		#print "...::: ACTIONS :::..."
-		#print " (1) Hacer llamada"
-		#print " (2) Cortar llamada"
-		#print " (3) Enviar Mensaje"
-		#print " (4) Agregar Contacto"
 		option = int(raw_input("Enter an Option: "))
 
 		if option != None:

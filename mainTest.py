@@ -63,9 +63,11 @@ def main(stdscr):
 		refreshInput(inp)
 		scr.clear()
 		stringMenu=writeMenu('ACTIONS',{1:'Hacer llamada',2:'Cortar Llamada',3:'Enviar mensaje',4:'Agregar contacto',5:'Mandar Ubicacion',6:'Jugar',7:'Escuchar Musica', 's':'salir' })
-		scr.addLine(stringMenu)
+		scr.addLines(stringMenu)
+		top=scr.getTop(opS.getReadyList())
+		scr.addLine(top)
 		lastInput=inp.getstr()
-		scr.addLine(lastInput)
+		
 		inp.move(1,3)
 		inp.box()
 
