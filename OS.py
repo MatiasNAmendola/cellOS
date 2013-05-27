@@ -106,9 +106,9 @@ class OS:
 		
 	def peripheralsAreAvailable(self, process):
 		for i in range(0, 6):
-			if self.runningProcess.peripherals[i] == 3:
+			if self.runningProcess.getPeripherals()[i] == 3:
 				return False
-			elif self.runningProcess.peripherals[i] == 2 and process.getPriority() < runningProcess.getPriority():
+			elif self.runningProcess.getPeripherals()[i] == 2 and process.getPriority() < self.runningProcess.getPriority():
 				return False
 		return True
 
