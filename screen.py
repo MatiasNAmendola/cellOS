@@ -31,13 +31,6 @@ def create_display(screen,title):
 	return win
 
 
-def get_string(win):
-	curses.echo()
-	result = win.getstr()
-	curses.echo()
-	return result
-
-
 def wl(screen,text):
 
 	curr_y, curr_x = screen.getyx()

@@ -8,22 +8,23 @@ def refresh(displayPanel,scr): #loop refresca el display cada 1 seg
 	win=displayPanel.window()
 	lines=scr.lines
 	while 1:
-
 		win.clear()
-		
 		win.move(1, 1)
 		displayPanel.show()
 		displayPanel.move(3,0)
 		win.move(1,1)
 		for l in lines:
 			wl(win,l)
-
-		#win.box()
 		win.move(0, 1)
-		win.addstr('Ingrese \'9\' para salir.')
+		win.addstr('Ingrese \'q\' para salir.')
 		win.refresh()
 		curses.panel.update_panels()
 		time.sleep(1)
+def refreshInput(inp):
+	inp.move(0, 1)
+	inp.addstr('Input')
+	inp.move(1,3)
+	inp.clrtoeol()
 
 def main(stdscr):
 	curses.curs_set(0)
@@ -40,27 +41,61 @@ def main(stdscr):
 	while 1:
 		curses.echo()
 		inputPanel.show()
-		inp.move(0, 1)
-		inp.addstr('Input')
-		inp.move(1,3)
-		inp.clrtoeol()
+		refreshInput(inp)
 		scr.clear()
-		stringMenu=writeMenu('MENU PRINCIPAL',{1:'Menu1',2:'Menu2',3:'Menu3' })
+		stringMenu=writeMenu('ACTIONS',{1:'Hacer llamada',2:'Cortar Llamada',3:'Enviar mensaje',4:'Agregar contacto',5:'Mandar Ubicacion',6:'Jugar',7:'Escuchar Musica' })
 		scr.addLine(stringMenu)
 		lastInput=inp.getstr()
 		scr.addLine(lastInput)
 		inp.move(1,3)
 		inp.box()
 
-		if lastInput=='9':
+		if lastInput=='q':
 			break
 		elif lastInput=='1':
 			scr.clear()
-			scr.addLine("Esta es la opcion 1")
-			while 1:
-				lastInput=inp.getstr()
-				if lastInput=='9':
-					break
+			scr.addLine("Escriba un numero de telefono")
+			lastInput=inp.getstr()
+			##Aqui lanzar el proceso
+			
+		elif lastInput=='2':
+			#Aqui cortar llamada
+			scr.addLine("Llamada actual finalizada")
+			
+		elif lastInput=='3':
+			scr.clear()
+			scr.addLine("Escriba un numero de telefono de destino")
+			lastInput=inp.getstr()
+			refreshInput(inp)
+			scr.addLine("Escriba el mensaje")
+			lastInput=inp.getstr()
+			#lanzar el mensaje
+		elif lastInput=='4':
+			scr.clear()
+			scr.addLine("Escriba el nombre")
+			lastInput=inp.getstr()
+			refreshInput(inp)
+			scr.addLine("Escriba el numero")
+			lastInput=inp.getstr()
+
+		elif lastInput=='5':
+			scr.clear()
+			scr.addLine("Escriba numero de telefono del destinatario")
+			lastInput=inp.getstr()
+
+		elif lastInput=='6':
+			scr.clear()
+			scr.addLine("Jugando Angry Birds")
+			lastInput=inp.getstr()
+
+		elif lastInput=='7':
+			scr.clear()
+			scr.addLine("Escuchando Musica")
+			lastInput=inp.getstr()
+
+
+
+
 			
 
 
