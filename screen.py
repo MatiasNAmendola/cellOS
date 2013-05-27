@@ -4,6 +4,7 @@ import time
 class Screen:
 	def __init__(self):
 		self.lines=[]
+		self.currentMenu=[]
 	def get(self):
 		return self.lines
 	def addLine(self,text):

@@ -9,15 +9,20 @@ from OS import *
 from llamada import *
 
 
-def refresh(displayPanel,scr): #loop refresca el display cada 1 seg
+def refresh(os,launcher,displayPanel,scr): #loop refresca el display cada 1 seg
 	win=displayPanel.window()
 	lines=scr.lines
+	scr.clear()
 	
 	win.clear()
 	win.move(1, 1)
 	displayPanel.show()
 	displayPanel.move(3,0)
 	win.move(1,1)
+
+	top=scr.getTopLines(os.getReadyList())
+	scr.addLines(scr.currentMenu)
+	scr.addLines(top)
 	for l in lines:
 		wl(win,l)
 	win.move(0, 1)
@@ -29,7 +34,7 @@ def refresh(displayPanel,scr): #loop refresca el display cada 1 seg
 def cycle(os,launcher,displayPanel,scr):
 	counter=0
 	while 1:
-		refresh(displayPanel,scr)
+		refresh(os,launcher,displayPanel,scr)
 		os.getProcesses(launcher.getNextProcesses(counter))
 		os.run()
 		counter+=1
@@ -64,9 +69,9 @@ def main(stdscr):
 		refreshInput(inp)
 		scr.clear()
 		stringMenu=writeMenu('ACTIONS',{1:'Hacer llamada',2:'Cortar Llamada',3:'Enviar mensaje',4:'Agregar contacto',5:'Mandar Ubicacion',6:'Jugar',7:'Escuchar Musica', 's':'salir' })
-		scr.addLines(stringMenu)
-		top=scr.getTopLines(opS.getReadyList())
-		scr.addLines(top)
+		scr.currentMenu=stringMenu
+		#top=scr.getTopLines(opS.getReadyList())
+		#scr.addLines(top)
 		lastInput=inp.getstr()
 		
 		inp.move(1,3)
@@ -127,7 +132,7 @@ def main(stdscr):
 
 
 if __name__ == '__main__':
-
+	currentMenu=[]
 	curses.wrapper(main)
 	curses.curs_set(1)
 	curses.echo()
