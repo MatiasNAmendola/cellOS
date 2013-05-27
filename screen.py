@@ -44,7 +44,7 @@ def writeMenu(name,options):
 	header='\n::::::'+name+'::::::'
 	output.append(header)
 	for k,v in options.items():
-		st=str(k)+' -> '+v
+		st='('+str(k)+')'+' -> '+v
 		output.append(st)
 	output.append('::::::::::::::::::')
 	strfinal=''
