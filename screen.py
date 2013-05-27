@@ -24,7 +24,7 @@ def create_input(screen, title):
 def create_display(screen,title):
 	maxY,maxX=screen.getmaxyx()
 	win = curses.newwin(maxY-3, maxX,4,0)
-	win.box()
+	#win.box()
 	win.move(0, 1)
 	win.addstr(title)
 	win.move(1, 1)
@@ -39,18 +39,19 @@ def get_string(win):
 
 
 def wl(screen,text):
+
 	curr_y, curr_x = screen.getyx()
-	screen.addstr(text)
+	screen.addstr(curr_y,0,text)
 	screen.clrtoeol()
-	screen.move(curr_y+1, curr_x)
+	screen.move(curr_y+1, 0)
 
 def writeMenu(name,options):
 	output=[]
 	st=''
 	header='::::::'+name+'::::::'
 	output.append(header)
-	for key, v in options.items():
-		st=key+" -> "+v
+	for k,v in options.items():
+		st=str(k)+' -> '+v
 		output.append(st)
 	output.append('::::::::::::::::::')
 	strfinal=''
