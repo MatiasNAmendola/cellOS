@@ -55,6 +55,7 @@ class OS:
 				self.lock.release()
 		
 	def getProcesses(self, nextProcessesList):
+		self.nextProcessesList = []
 		self.lock.acquire()
 		if (self.actionFromDisplay == 2 and self.runningProcess != None):
 			if(self.runningProcess.type == 1 or self.runningProcess.type == 2):
