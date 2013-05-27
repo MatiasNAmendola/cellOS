@@ -20,14 +20,13 @@ def refresh(displayPanel,scr): #loop refresca el display cada 1 seg
 	for l in lines:
 		wl(win,l)
 	win.move(0, 1)
-	win.addstr('Ingrese \'q\' para salir.')
+	win.addstr('')
 	win.refresh()
 	curses.panel.update_panels()
 
 
 def cycle(os,launcher,displayPanel,scr):
 	counter=0
-	time.sleep(0.5)
 	while 1:
 		refresh(displayPanel,scr)
 		os.getProcesses(launcher.getNextProcesses(counter))
@@ -60,18 +59,17 @@ def main(stdscr):
 	loop.daemon = True
 	loop.start()
 	while 1:
-		time.sleep(1)
 		inputPanel.show()
 		refreshInput(inp)
 		scr.clear()
-		stringMenu=writeMenu('ACTIONS',{1:'Hacer llamada',2:'Cortar Llamada',3:'Enviar mensaje',4:'Agregar contacto',5:'Mandar Ubicacion',6:'Jugar',7:'Escuchar Musica' })
+		stringMenu=writeMenu('ACTIONS',{1:'Hacer llamada',2:'Cortar Llamada',3:'Enviar mensaje',4:'Agregar contacto',5:'Mandar Ubicacion',6:'Jugar',7:'Escuchar Musica', 's':'salir' })
 		scr.addLine(stringMenu)
 		lastInput=inp.getstr()
 		scr.addLine(lastInput)
 		inp.move(1,3)
 		inp.box()
 
-		if lastInput=='q':
+		if lastInput=='s':
 			break
 		elif lastInput=='1':
 			scr.clear()
