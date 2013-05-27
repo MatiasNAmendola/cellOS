@@ -5,6 +5,7 @@ class Screen:
 	def __init__(self):
 		self.lines=[]
 		self.currentMenu=[]
+		self.currentMessage=''
 	def get(self):
 		return self.lines
 	def addLine(self,text):

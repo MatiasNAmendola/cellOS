@@ -21,6 +21,7 @@ def refresh(os,launcher,displayPanel,scr): #loop refresca el display cada 1 seg
 	win.move(1,1)
 
 	top=scr.getTopLines(os.getReadyList())
+	scr.addLines(scr.currentMessage)
 	scr.addLines(scr.currentMenu)
 	scr.addLines(top)
 	for l in lines:
@@ -81,7 +82,7 @@ def main(stdscr):
 			break
 		elif lastInput=='1':
 			scr.clear()
-			scr.addLine("Escriba un numero de telefono")
+			scr.currentMessage="Escriba un numero de telefono"
 			lastInput=inp.getstr()
 			llamada=Call([False,1,10,lastInput])
 			opS.nextProcessesList.append(llamada)
@@ -89,37 +90,38 @@ def main(stdscr):
 			
 		elif lastInput=='2':
 			#Aqui cortar llamada
-			scr.addLine("Llamada actual finalizada")
+			scr.currentMessage="Llamada actual finalizada"
+			
 			
 		elif lastInput=='3':
 			scr.clear()
-			scr.addLine("Escriba un numero de telefono de destino")
+			scr.currentMessage="Escriba un numero de telefono de destino"
 			lastInput=inp.getstr()
 			refreshInput(inp)
-			scr.addLine("Escriba el mensaje")
+			scr.currentMessage="Escriba el mensaje"
 			lastInput=inp.getstr()
 			#lanzar el mensaje
 		elif lastInput=='4':
 			scr.clear()
-			scr.addLine("Escriba el nombre")
+			scr.currentMessage="Escriba el nombre"
 			lastInput=inp.getstr()
 			refreshInput(inp)
-			scr.addLine("Escriba el numero")
+			scr.currentMessage="Escriba el numero"
 			lastInput=inp.getstr()
 
 		elif lastInput=='5':
 			scr.clear()
-			scr.addLine("Escriba numero de telefono del destinatario")
+			scr.currentMessage="Escriba numero de telefono del destinatario"
 			lastInput=inp.getstr()
 
 		elif lastInput=='6':
 			scr.clear()
-			scr.addLine("Jugando Angry Birds")
+			scr.currentMessage="Jugando Angry Birds"
 			lastInput=inp.getstr()
 
 		elif lastInput=='7':
 			scr.clear()
-			scr.addLine("Escuchando Musica")
+			scr.currentMessage="Escuchando Musica"
 			lastInput=inp.getstr()
 
 
