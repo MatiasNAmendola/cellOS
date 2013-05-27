@@ -20,7 +20,7 @@ def refresh(displayPanel,scr): #loop refresca el display cada 1 seg
 
 		#win.box()
 		win.move(0, 1)
-		win.addstr('')
+		win.addstr('Ingrese \'9\' para salir.')
 		win.refresh()
 		curses.panel.update_panels()
 		time.sleep(1)
@@ -44,15 +44,24 @@ def main(stdscr):
 		inp.addstr('Input')
 		inp.move(1,3)
 		inp.clrtoeol()
-		principal={1:'Menu1',2:'Menu2',3:'Menu3',9: 'Salir' }
-		stringMenu=writeMenu('MENU PRINCIPAL',principal)
+		scr.clear()
+		stringMenu=writeMenu('MENU PRINCIPAL',{1:'Menu1',2:'Menu2',3:'Menu3' })
 		scr.addLine(stringMenu)
 		lastInput=inp.getstr()
 		scr.addLine(lastInput)
 		inp.move(1,3)
 		inp.box()
-		if lastInput=='quit':
+
+		if lastInput=='9':
 			break
+		elif lastInput=='1':
+			scr.clear()
+			scr.addLine("Esta es la opcion 1")
+			while 1:
+				lastInput=inp.getstr()
+				if lastInput=='9':
+					break
+			
 
 
 

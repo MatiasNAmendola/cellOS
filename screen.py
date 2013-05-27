@@ -48,7 +48,7 @@ def wl(screen,text):
 def writeMenu(name,options):
 	output=[]
 	st=''
-	header='::::::'+name+'::::::'
+	header='\n::::::'+name+'::::::'
 	output.append(header)
 	for k,v in options.items():
 		st=str(k)+' -> '+v
