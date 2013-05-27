@@ -95,7 +95,7 @@ class OS:
 			if int(self.runningProcess.elapsedTime) >= int(self.runningProcess.totalTime):
 				self.runningProcess = None
 				#Revisar si hay algun proceso en la cola ready
-				if( ~self.scheduler.isEmpty() ):
+				if not ( self.scheduler.isEmpty() ):
 					self.runningProcess = self.scheduler.dequeReady()
 				else:
 					return
