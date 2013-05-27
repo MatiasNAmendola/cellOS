@@ -3,23 +3,39 @@ import time
 import threading
 from curses import panel
 from screen import *
+from proceso import *
+from launcher import *
+from OS import *
+
 
 def refresh(displayPanel,scr): #loop refresca el display cada 1 seg
 	win=displayPanel.window()
 	lines=scr.lines
+	
+	win.clear()
+	win.move(1, 1)
+	displayPanel.show()
+	displayPanel.move(3,0)
+	win.move(1,1)
+	for l in lines:
+		wl(win,l)
+	win.move(0, 1)
+	win.addstr('Ingrese \'q\' para salir.')
+	win.refresh()
+	curses.panel.update_panels()
+
+
+def cycle(os,launcher,displayPanel,scr):
+	counter=0
+	time.sleep(1)
 	while 1:
-		win.clear()
-		win.move(1, 1)
-		displayPanel.show()
-		displayPanel.move(3,0)
-		win.move(1,1)
-		for l in lines:
-			wl(win,l)
-		win.move(0, 1)
-		win.addstr('Ingrese \'q\' para salir.')
-		win.refresh()
-		curses.panel.update_panels()
+		os.getProcesses(launcher.getNextProcesses(counter))
+		os.run()
+		refresh(displayPanel,scr)
+		counter+=1
 		time.sleep(1)
+		
+
 def refreshInput(inp):
 	inp.move(0, 1)
 	inp.addstr('Input')
@@ -35,7 +51,11 @@ def main(stdscr):
 	inputPanel.move(0,0)
 	win = create_display(stdscr,'Display')
 	displayPanel=curses.panel.new_panel(win)
-	loop = threading.Thread(target=refresh, args=(displayPanel,scr))
+
+	filePath = "example.txt"
+	launcher = Launcher(filePath)
+	opS = OS()
+	loop = threading.Thread(target=cycle, args=(opS,launcher,displayPanel,scr))
 	loop.daemon = True
 	loop.start()
 	while 1:
