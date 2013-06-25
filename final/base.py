@@ -553,7 +553,7 @@ global seguir
 global top
 global port
 
-if len(sys.args) == 1:
+if len(sys.argv) == 1:
     print "Debes correr el prgrama indicando el numero de puerto(python base.py 9999).\n Para correr una segunda instancia python base.py 9998 , etc\n NO SE PUEDE REPETIR"
     raw_input("apreta una tecla para terminar")
     sys.exit()
