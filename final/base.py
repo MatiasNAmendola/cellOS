@@ -565,7 +565,17 @@ else:
 ## Seba y JP: receive connections estara esperando una conexion, recibira el mensaje y lo enviara a la funcion q lo 
 ## procesara
 def process_received(proceso):
-    #reemplazar pass con real codigo
+    pu = proceso.split(';')
+    if(len(pu) <= 1):
+        print "Comando incorrecto\n"
+    elif (pu[2]=='1' or pu[2]=='2'):
+        procesos.append(Llamada(orden))
+    elif (pu[2]=='3' or pu[2]=='4'):
+        procesos.append(Mensaje(orden))
+    elif (pu[2]=='5'):
+        procesos.append(Agregar_Contacto(orden))
+    else:
+        procesos.append(Varios(orden))
     print "Se recibio: ", proceso
 
 def receive_connections(): 
@@ -592,6 +602,17 @@ def menu_sockets(orden_array):
     s.connect(('127.0.0.1', puerto))
     print "Conectado!"
     process_to_send = orden_array[2]
+    pu = process_to_send.split(';')
+    if(len(pu) <= 1):
+        print "Comando incorrecto\n"
+    elif (pu[2]=='1' or pu[2]=='2'):
+        procesos.append(Llamada(orden))
+    elif (pu[2]=='3' or pu[2]=='4'):
+        procesos.append(Mensaje(orden))
+    elif (pu[2]=='5'):
+        procesos.append(Agregar_Contacto(orden))
+    else:
+        procesos.append(Varios(orden))
     s.send(process_to_send)
     s.close()
 
