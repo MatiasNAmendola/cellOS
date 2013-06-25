@@ -634,7 +634,12 @@ while(seguir):
     elif (orden == ""):
         pass
     elif (orden.split()[0] == "send" ):
-        menu_sockets(orden.split())    
+        if len(orden.split()) < 3:
+            print "Faltan parametros (send numeropuerto instruccion)"
+        elif not (orden.split()[1].isdigit()):
+            print "El puerto indicado no es valido: ", orden.split()[1]
+        else:
+            menu_sockets(orden.split())    
     else:
         pu = orden.split(';')
         if(len(pu) <= 1):
