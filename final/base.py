@@ -558,7 +558,7 @@ if len(sys.argv) == 1:
     raw_input("apreta una tecla para terminar")
     sys.exit()
 else:
-    port = sys.argv[1]
+    port = int(sys.argv[1])
     
 
 ## Seba y JP: receive connections estara esperando una conexion, recibira el mensaje y lo enviara a la funcion q lo 
