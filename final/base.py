@@ -11,6 +11,7 @@ import multiprocessing
 from multiprocessing import Process, Queue
 import signal
 import random
+from socket import socket, AF_INET, SOCK_STREAM
 
 #metodo limpiar pantalla http://stackoverflow.com/questions/517970/how-to-clear-python-interpreter-console
 def cls():
@@ -328,7 +329,7 @@ class Simulador:
             tiempo_ejecucion += 1
             #limpia la pantalla
             cls()
-            print "Comandos:\n'salir'-> detiene programa\n'top'-> ver procesos (2 veces deja de ver los procesos)\n'nombre_proc;tipo;opc1;opc2sihay'-> ingresa un nuevo proceso\nTiempo actual:"+ str(tiempo_ejecucion)
+            print "Comandos:\n'salir'-> detiene programa\n'top'-> ver procesos (2 veces deja de ver los procesos)\n'nombre_proc;tipo;opc1;opc2sihay'-> ingresa un nuevo proceso\n'menu_sockets'-> menu para conectar con otro dispositivo\nTiempo actual:"+ str(tiempo_ejecucion)
             
     def updateReady(self):
         global disp
@@ -550,6 +551,47 @@ global running
 global tiempo_ejecucion
 global seguir
 global top
+global port
+
+if len(sys.args) == 1:
+    print "Debes correr el prgrama indicando el numero de puerto(python base.py 9999).\n Para correr una segunda instancia python base.py 9998 , etc\n NO SE PUEDE REPETIR"
+    raw_input("apreta una tecla para terminar")
+    sys.exit()
+else:
+    port = sys.argv[1]
+    
+
+## Seba y JP: receive connections estara esperando una conexion, recibira el mensaje y lo enviara a la funcion q lo 
+## procesara
+def process_received(proceso):
+    #reemplazar pass con real codigo
+    print "Se recibio: ", proceso
+
+def receive_connections(): 
+    while 1:
+        s = socket(AF_INET, SOCK_STREAM)
+        s.bind(('127.0.0.1',port))
+        s.listen(5)
+        sock, addr = s.accept()
+        print "conectado con ", addr
+        new_process = sock.recv(1024)
+        process_received(new_process) ##procesar proceso recibido
+        s.close()
+
+
+t = threading.Thread(target= receive_connections)
+t.daemon = True
+t.start()
+
+
+
+def menu_sockets():
+    s = socket(AF_INET, SOCK_STREAM)
+    puerto = raw_input("Indique el puerto del otro celular")
+    s.connect(('127.0.0.1', puerto))
+    process_to_send = raw_input('Conectado!\nEnvia un proceso escribiendolo en el siguiente formato: formato;formato;formato')
+    s.send(process_to_send)
+    s.close()
 
 
 
@@ -567,14 +609,13 @@ ready = []
 running = []
 
 
-
 simu = Simulador()
 
 p1 = Thread(target = simu.Simular)
 p1.start()
   
 cls()
-print "Comandos:\n'salir'-> detiene programa\n'top'-> ver procesos (2 veces deja de ver los procesos)\n'nombre_proc;tipo;opc1;opc2sihay'-> ingresa un nuevo proceso"
+print "Comandos:\n'salir'-> detiene programa\n'top'-> ver procesos (2 veces deja de ver los procesos)\n'nombre_proc;tipo;opc1;opc2sihay'-> ingresa un nuevo proceso\n'menu_sockets'-> menu para conectar con otro dispositivo"
 while(seguir):
 
     orden = raw_input()
@@ -589,6 +630,8 @@ while(seguir):
             top = True
     elif (orden == ""):
         pass
+    elif (orden == "menu_sockets"):
+        menu_sockets()    
     else:
         pu = orden.split(';')
         if(len(pu) <= 1):
