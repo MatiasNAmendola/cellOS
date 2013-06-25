@@ -329,13 +329,14 @@ class Simulador:
             tiempo_ejecucion += 1
             #limpia la pantalla
             cls()
-            print "Comandos:\n'salir'-> detiene programa\n'top'-> ver procesos (2 veces deja de ver los procesos)\n'nombre_proc;tipo;opc1;opc2sihay'-> ingresa un nuevo proceso\n'menu_sockets'-> menu para conectar con otro dispositivo\nTiempo actual:"+ str(tiempo_ejecucion)
+            print "Comandos:\n'salir'-> detiene programa\n'top'-> ver procesos (2 veces deja de ver los procesos)\n'nombre_proc;tipo;opc1;opc2sihay'-> ingresa un nuevo proceso\n'send numeroPuerto nombre_proc;tipo;opc1;opc2sihay'-> enviar proceso a dispositivo en numeroPuerto\nTiempo actual:"+ str(tiempo_ejecucion)
             
     def updateReady(self):
         global disp
         global top
         global running
         global ready
+        global en_menu_sockets
         #v2.3
         global perifericos
     # v 2.3 revisa en la cola ready si puede entrar alguno después de que llegaron procesos o de que terminaron procesos
@@ -568,15 +569,15 @@ def process_received(proceso):
     print "Se recibio: ", proceso
 
 def receive_connections(): 
+    s = socket(AF_INET, SOCK_STREAM)
+    s.bind(('127.0.0.1',port))
+    s.listen(5)
     while 1:
-        s = socket(AF_INET, SOCK_STREAM)
-        s.bind(('127.0.0.1',port))
-        s.listen(5)
         sock, addr = s.accept()
         print "conectado con ", addr
         new_process = sock.recv(1024)
         process_received(new_process) ##procesar proceso recibido
-        s.close()
+    s.close()
 
 
 t = threading.Thread(target= receive_connections)
@@ -585,11 +586,12 @@ t.start()
 
 
 
-def menu_sockets():
+def menu_sockets(orden_array):
     s = socket(AF_INET, SOCK_STREAM)
-    puerto = raw_input("Indique el puerto del otro celular")
+    puerto = int(orden_array[1])
     s.connect(('127.0.0.1', puerto))
-    process_to_send = raw_input('Conectado!\nEnvia un proceso escribiendolo en el siguiente formato: formato;formato;formato')
+    print "Conectado!"
+    process_to_send = orden_array[2]
     s.send(process_to_send)
     s.close()
 
@@ -612,10 +614,11 @@ running = []
 simu = Simulador()
 
 p1 = Thread(target = simu.Simular)
+p1.daemon = True
 p1.start()
   
 cls()
-print "Comandos:\n'salir'-> detiene programa\n'top'-> ver procesos (2 veces deja de ver los procesos)\n'nombre_proc;tipo;opc1;opc2sihay'-> ingresa un nuevo proceso\n'menu_sockets'-> menu para conectar con otro dispositivo"
+print "Comandos:\n'salir'-> detiene programa\n'top'-> ver procesos (2 veces deja de ver los procesos)\n'nombre_proc;tipo;opc1;opc2sihay'-> ingresa un nuevo proceso\n'send numeroPuerto nombre_proc;tipo;opc1;opc2sihay'-> enviar proceso a dispositivo en numeroPuerto"
 while(seguir):
 
     orden = raw_input()
@@ -630,8 +633,8 @@ while(seguir):
             top = True
     elif (orden == ""):
         pass
-    elif (orden == "menu_sockets"):
-        menu_sockets()    
+    elif (orden.split()[0] == "send" ):
+        menu_sockets(orden.split())    
     else:
         pu = orden.split(';')
         if(len(pu) <= 1):
