@@ -98,6 +98,7 @@ class Llamada(Proceso):
             self.id = int(arreglo[6])
         else:
             self.id =  tiempo_ejecucion
+        
         #v 2.3
         self.listperi.append(1)
         self.listperi.append(3)
