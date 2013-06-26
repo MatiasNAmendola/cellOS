@@ -569,13 +569,13 @@ def process_received(proceso):
     if(len(pu) <= 1):
         print "Comando incorrecto\n"
     elif (pu[2]=='1' or pu[2]=='2'):
-        procesos.append(Llamada(orden))
+        procesos.append(Llamada(proceso))
     elif (pu[2]=='3' or pu[2]=='4'):
-        procesos.append(Mensaje(orden))
+        procesos.append(Mensaje(proceso))
     elif (pu[2]=='5'):
-        procesos.append(Agregar_Contacto(orden))
+        procesos.append(Agregar_Contacto(proceso))
     else:
-        procesos.append(Varios(orden))
+        procesos.append(Varios(proceso))
     print "Se recibio: ", proceso
 
 def receive_connections(): 
@@ -606,13 +606,13 @@ def menu_sockets(orden_array):
     if(len(pu) <= 1):
         print "Comando incorrecto\n"
     elif (pu[2]=='1' or pu[2]=='2'):
-        procesos.append(Llamada(orden))
+        procesos.append(Llamada(process_to_send))
     elif (pu[2]=='3' or pu[2]=='4'):
-        procesos.append(Mensaje(orden))
+        procesos.append(Mensaje(process_to_send))
     elif (pu[2]=='5'):
         procesos.append(Agregar_Contacto(orden))
     else:
-        procesos.append(Varios(orden))
+        procesos.append(Varios(process_to_send))
     s.send(process_to_send)
     s.close()
 
