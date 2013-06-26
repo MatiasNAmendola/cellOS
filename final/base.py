@@ -672,13 +672,6 @@ while(seguir):
             top = True
     elif (orden == ""):
         pass
-    elif (orden.split()[0] == "send" ):
-        if len(orden.split()) < 3:
-            print "Faltan parametros (send numeropuerto instruccion)"
-        elif not (orden.split()[1].isdigit()):
-            print "El puerto indicado no es valido: ", orden.split()[1]
-        else:
-            menu_sockets(orden.split()) 
     elif (orden.split()[0] == "CALL01" ):
         if len(orden.split()) < 3:
             print "Faltan parametros (CALL01 numeropuerto ID)"
@@ -686,7 +679,7 @@ while(seguir):
             print "El puerto indicado no es valido: ", orden.split()[1]
         else:
             call01=hacer_llamada_socket(orden.split()[1],orden.split()[2])
-            menu_socket(call01)
+            menu_sockets(call01)
     elif (orden.split()[0] == "CALL00" ):
         if len(orden.split()) < 3:
             print "Faltan parametros (CALL00 numeropuerto ID)"
@@ -694,7 +687,14 @@ while(seguir):
             print "El puerto indicado no es valido: ", orden.split()[1]
         else:
             call01=hacer_llamada_socket(orden.split()[1],orden.split()[2])
-            menu_socket(call01)  
+            menu_sockets(call01)  
+    elif (orden.split()[0] == "send" ):
+        if len(orden.split()) < 3:
+            print "Faltan parametros (send numeropuerto instruccion)"
+        elif not (orden.split()[1].isdigit()):
+            print "El puerto indicado no es valido: ", orden.split()[1]
+        else:
+            menu_sockets(orden.split())
     else:
         pu = orden.split(';')
         if(len(pu) <= 1):
