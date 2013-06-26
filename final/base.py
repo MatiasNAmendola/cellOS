@@ -92,7 +92,12 @@ class Llamada(Proceso):
             Proceso.__init__(self,arreglo[0],arreglo[1],arreglo[2],arreglo[3],arreglo[5])
         else:
             Proceso.__init__(self,arreglo[0],tiempo_ejecucion,arreglo[2],arreglo[3],arreglo[5])
+    
         self.numero=int(arreglo[4])
+        if len(arreglo)>6:
+            self.id = int(arreglo[6])
+        else:
+            self.id =  tiempo_ejecucion
         #v 2.3
         self.listperi.append(1)
         self.listperi.append(3)
@@ -325,7 +330,7 @@ class Simulador:
             
             boolean = top
             cambioperif = False
-            time.sleep(1)
+            time.sleep(3)
             tiempo_ejecucion += 1
             #limpia la pantalla
             cls()
@@ -489,7 +494,7 @@ class Memoria:
         self.rom='memoria.txt'
         self.contador=0 #Ve cuantas veces ha sido usado
         self.contacto='contacto.text'
-        self.mensaje='mensaje.text'
+        self.mensaje='mensaje.txt'
         self.contador_contacto=0
         self.contador_sms=0
     #Escribe en memoria los procesos que se van ejecutando
@@ -569,13 +574,13 @@ def process_received(proceso):
     if(len(pu) <= 1):
         print "Comando incorrecto\n"
     elif (pu[2]=='1' or pu[2]=='2'):
-        procesos.append(Llamada(orden))
+        procesos.append(Llamada(proceso))
     elif (pu[2]=='3' or pu[2]=='4'):
-        procesos.append(Mensaje(orden))
+        procesos.append(Mensaje(proceso))
     elif (pu[2]=='5'):
-        procesos.append(Agregar_Contacto(orden))
+        procesos.append(Agregar_Contacto(proceso))
     else:
-        procesos.append(Varios(orden))
+        procesos.append(Varios(proceso))
     print "Se recibio: ", proceso
 
 def receive_connections(): 
@@ -606,13 +611,13 @@ def menu_sockets(orden_array):
     if(len(pu) <= 1):
         print "Comando incorrecto\n"
     elif (pu[2]=='1' or pu[2]=='2'):
-        procesos.append(Llamada(orden))
+        procesos.append(Llamada(process_to_send))
     elif (pu[2]=='3' or pu[2]=='4'):
-        procesos.append(Mensaje(orden))
+        procesos.append(Mensaje(process_to_send))
     elif (pu[2]=='5'):
-        procesos.append(Agregar_Contacto(orden))
+        procesos.append(Agregar_Contacto(process_to_send))
     else:
-        procesos.append(Varios(orden))
+        procesos.append(Varios(process_to_send))
     s.send(process_to_send)
     s.close()
 
