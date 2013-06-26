@@ -617,10 +617,22 @@ def menu_sockets(orden_array):
         procesos.append(Mensaje(process_to_send))
     elif (pu[2]=='5'):
         procesos.append(Agregar_Contacto(process_to_send))
+    elif (pu[2]=='c'):
+        cortar_llamada(pu[-1])
     else:
         procesos.append(Varios(process_to_send))
     s.send(process_to_send)
     s.close()
+
+def hacer_llamada_socket(puerto, callID):
+    lineas=["send ",puerto,"hacer_llamada;5;1;0;2277567;-1;"+callID]
+    return lineas
+def cortar_llamada_socket(callID):
+    return ["send ",puerto,"cortar_llamada;5;c;0;2277567;-1;"+callID]
+def cortar_llamada(callID):
+    for r in running:
+        if (r.getTipo()==1 or r.getTipo()==2) and (r.id==callID):
+            r.tiempo=0
 
 
 
@@ -666,7 +678,23 @@ while(seguir):
         elif not (orden.split()[1].isdigit()):
             print "El puerto indicado no es valido: ", orden.split()[1]
         else:
-            menu_sockets(orden.split())    
+            menu_sockets(orden.split()) 
+    elif (orden.split()[0] == "CALL01" ):
+        if len(orden.split()) < 3:
+            print "Faltan parametros (CALL01 numeropuerto ID)"
+        elif not (orden.split()[1].isdigit()):
+            print "El puerto indicado no es valido: ", orden.split()[1]
+        else:
+            call01=hacer_llamada_socket(orden.split()[1],orden.split()[2])
+            menu_socket(call01)
+    elif (orden.split()[0] == "CALL00" ):
+        if len(orden.split()) < 3:
+            print "Faltan parametros (CALL00 numeropuerto ID)"
+        elif not (orden.split()[1].isdigit()):
+            print "El puerto indicado no es valido: ", orden.split()[1]
+        else:
+            call01=hacer_llamada_socket(orden.split()[1],orden.split()[2])
+            menu_socket(call01)  
     else:
         pu = orden.split(';')
         if(len(pu) <= 1):
